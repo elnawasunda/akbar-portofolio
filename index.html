@@ -1,164 +1,1005 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Akbar Nawasunda</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    * {
-      font-family: 'Inter', sans-serif;
-    }
-    body {
-      margin: 0;
-      background: radial-gradient(ellipse at bottom, #1e002a 0%, #000000 100%);
-      color: #f1f5f9;
-      overflow-x: hidden;
-    }
-    canvas#stars {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
-    .gradient-text {
-      background: linear-gradient(to right, #6b21a8, #0ea5e9, #dc2626);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .icon {
-      width: 24px;
-      height: 24px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akbar Nawasunda - Music Producer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --purple-primary: #6A0DAD;
+            --purple-secondary: #8A2BE2;
+            --purple-light: #9B59B6;
+            --red-primary: #FF0033;
+            --red-secondary: #FF3366;
+            --dark-bg: #0A0A0A;
+            --darker-bg: #050505;
+            --card-bg: rgba(30, 10, 40, 0.6);
+            --text-light: #F0F0F0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+            color: var(--text-light);
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .bg-element {
+            position: absolute;
+            background: linear-gradient(135deg, var(--purple-primary), var(--red-primary));
+            opacity: 0.1;
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0.1;
+            }
+            50% {
+                opacity: 0.15;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px) rotate(360deg);
+                opacity: 0.1;
+            }
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(20, 5, 30, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--purple-secondary), var(--red-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 1px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a:hover {
+            color: var(--purple-secondary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--purple-secondary), var(--red-secondary));
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--purple-secondary), var(--red-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+            text-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .hero-quote {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--purple-secondary);
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .hero-quote::before, .hero-quote::after {
+            content: '"';
+            color: var(--red-secondary);
+            font-size: 1.8rem;
+            position: absolute;
+        }
+        
+        .hero-quote::before {
+            top: -10px;
+            left: -20px;
+        }
+        
+        .hero-quote::after {
+            bottom: -20px;
+            right: -20px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 16px 45px;
+            background: linear-gradient(45deg, var(--purple-primary), var(--red-primary));
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.4s;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border: none;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 20px rgba(138, 43, 226, 0.4);
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(45deg, var(--red-primary), var(--purple-primary));
+            transition: width 0.4s;
+            z-index: -1;
+        }
+        
+        .cta-button:hover::before {
+            width: 100%;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 0, 51, 0.5);
+        }
+        
+        /* About Section */
+        .about {
+            padding: 120px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 70px;
+            background: linear-gradient(45deg, var(--purple-secondary), var(--red-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--purple-secondary), var(--red-secondary));
+            border-radius: 2px;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--purple-primary), var(--red-primary));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.3);
+        }
+        
+        .about-image::before {
+            content: '🎵';
+            font-size: 10rem;
+            opacity: 0.3;
+            position: absolute;
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+        }
+        
+        .about-info {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .info-item {
+            display: flex;
+            background: rgba(50, 15, 70, 0.4);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid var(--purple-secondary);
+        }
+        
+        .info-label {
+            color: var(--purple-secondary);
+            font-weight: 600;
+            width: 120px;
+        }
+        
+        /* Skills Section */
+        .skills {
+            padding: 120px 0;
+            position: relative;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .skill-card {
+            background: var(--card-bg);
+            padding: 40px 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.4s;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--purple-secondary), var(--red-secondary));
+            transition: width 0.4s;
+        }
+        
+        .skill-card:hover::before {
+            width: 100%;
+            opacity: 0.1;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(138, 43, 226, 0.3);
+            border-color: rgba(138, 43, 226, 0.5);
+        }
+        
+        .skill-icon {
+            font-size: 3.5rem;
+            color: var(--purple-secondary);
+            margin-bottom: 25px;
+            transition: all 0.4s;
+        }
+        
+        .skill-card:hover .skill-icon {
+            color: var(--red-secondary);
+            transform: scale(1.1);
+        }
+        
+        .skill-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Portfolio Section */
+        .portfolio {
+            padding: 120px 0;
+            position: relative;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .portfolio-item {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            position: relative;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(138, 43, 226, 0.3);
+            border-color: rgba(138, 43, 226, 0.5);
+        }
+        
+        .portfolio-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--purple-primary), var(--red-primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .portfolio-image::before {
+            content: '🎵';
+            font-size: 5rem;
+            position: absolute;
+            opacity: 0.3;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.2); opacity: 0.5; }
+            100% { transform: scale(1); opacity: 0.3; }
+        }
+        
+        .portfolio-content {
+            padding: 25px;
+        }
+        
+        .portfolio-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--purple-secondary);
+        }
+        
+        .portfolio-link {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 15px;
+            color: var(--red-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .portfolio-link i {
+            margin-left: 8px;
+            transition: transform 0.3s;
+        }
+        
+        .portfolio-link:hover {
+            color: var(--purple-secondary);
+        }
+        
+        .portfolio-link:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 120px 0;
+            position: relative;
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-top: 50px;
+        }
+        
+        .contact-info {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(138, 43, 226, 0.2);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(50, 15, 70, 0.3);
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        
+        .contact-item:hover {
+            background: rgba(80, 25, 110, 0.4);
+            transform: translateX(5px);
+        }
+        
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+            color: var(--purple-secondary);
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .social-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.4s;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(138, 43, 226, 0.2);
+        }
+        
+        .social-link:hover {
+            background: linear-gradient(45deg, var(--purple-primary), var(--red-primary));
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.3);
+        }
+        
+        .social-icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 15px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 120px 0;
+            position: relative;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .testimonial-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.4s;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(138, 43, 226, 0.2);
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(138, 43, 226, 0.2);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            position: relative;
+        }
+        
+        .testimonial-text::before {
+            content: '"';
+            color: var(--purple-secondary);
+            font-size: 3rem;
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            opacity: 0.3;
+        }
+        
+        .testimonial-author {
+            color: var(--purple-secondary);
+            font-weight: bold;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(10, 5, 15, 0.95);
+            padding: 70px 0 30px;
+            text-align: center;
+            border-top: 1px solid rgba(138, 43, 226, 0.2);
+        }
+        
+        .download-cv {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, var(--purple-primary), var(--red-primary));
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            margin-bottom: 40px;
+            font-weight: 600;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .download-cv::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(45deg, var(--red-primary), var(--purple-primary));
+            transition: width 0.4s;
+            z-index: -1;
+        }
+        
+        .download-cv:hover::before {
+            width: 100%;
+        }
+        
+        .download-cv:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 0, 51, 0.4);
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            color: var(--purple-light);
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+            
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2.3rem;
+            }
+            
+            .about-info {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero-quote {
+                font-size: 1.1rem;
+            }
+            
+            .cta-button {
+                padding: 14px 35px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <canvas id="stars"></canvas>
-
-  <header class="p-6 flex justify-between items-center bg-black/40 backdrop-blur-md fixed w-full z-50">
-    <h1 class="text-2xl font-bold gradient-text">Akbar Nawasunda</h1>
-    <nav class="space-x-6">
-      <a href="#about" class="hover:text-blue-400">Tentang</a>
-      <a href="#works" class="hover:text-blue-400">Karya</a>
-      <a href="#contact" class="hover:text-blue-400">Kontak</a>
-    </nav>
-  </header>
-
-  <section class="pt-32 text-center px-6">
-    <h2 class="text-5xl font-extrabold gradient-text mb-4">Music is My Legacy</h2>
-    <p class="text-lg text-slate-300 max-w-2xl mx-auto">Gua Akbar Nawasunda, produser musik, DJ, dan komposer asal Bandung Barat. Gua ngejalanin hidup gua lewat musik, karena gua percaya lagu bisa nyimpen kenangan, rasa, dan mimpi.</p>
-  </section>
-
-  <section id="about" class="py-24 px-6 bg-slate-900/60 backdrop-blur-md">
-    <div class="max-w-4xl mx-auto">
-      <h3 class="text-3xl font-bold mb-6 gradient-text">Tentang Saya</h3>
-      <ul class="space-y-4 text-slate-200">
-        <li><strong>Umur:</strong> 19 tahun</li>
-        <li><strong>Lokasi:</strong> Cipeundeuy, Bandung Barat</li>
-        <li><strong>Genre Favorit:</strong> Breakbeat, Indobass, Jungle Dutch Bandung</li>
-        <li><strong>Tujuan:</strong> Menjadi musisi legendaris</li>
-        <li><em>"Gua mau hidup gua ditulis dalam lagu. Lagu itu ekspresi, emosi, dan pikiran yang disatukan dalam melodi."</em></li>
-      </ul>
-    </div>
-  </section>
-
-  <section id="works" class="py-24 px-6">
-    <div class="max-w-6xl mx-auto">
-      <h3 class="text-3xl font-bold mb-10 text-center gradient-text">Karya</h3>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-slate-800 rounded-xl p-4 shadow hover:shadow-xl">
-          <img src="https://svgrepo.com/show/354195/youtube.svg" class="icon mb-2" alt="YouTube">
-          <h4 class="text-lg font-semibold mb-2">DJ TAK INGIN USAI BREAKBEAT</h4>
-          <a href="https://youtu.be/LaUzmxudvyI" class="text-blue-400 hover:underline" target="_blank">Tonton di YouTube</a>
+    <!-- Animated Background Elements -->
+    <div class="animated-bg" id="animated-bg"></div>
+    
+    <header>
+        <nav class="container">
+            <div class="logo">Akbar Nawasunda</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Akbar Nawasunda</h1>
+                <p>Music Producer | DJ | Composer</p>
+                <div class="hero-quote">slowly but surely</div>
+                <a href="#portfolio" class="cta-button">Dengarkan Karya Saya</a>
+            </div>
         </div>
-        <div class="bg-slate-800 rounded-xl p-4 shadow hover:shadow-xl">
-          <img src="https://svgrepo.com/show/354195/youtube.svg" class="icon mb-2" alt="YouTube">
-          <h4 class="text-lg font-semibold mb-2">DJ HARGAI AKU BREAKBEAT</h4>
-          <a href="https://youtu.be/icYP_m18FYE" class="text-blue-400 hover:underline" target="_blank">Tonton di YouTube</a>
+    </section>
+    
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Tentang Saya</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <!-- Music note will be generated via CSS -->
+                </div>
+                <div class="about-text">
+                    <p>Alasan saya ingin menjadi produser musik adalah karena saya ingin hidup saya ditulis dalam lagu. Lagu itu menurut saya adalah ekspresi, emosi, dan pikiran yang disatukan menjadi sebuah keindahan dalam melodi.</p>
+                    
+                    <p>Saya memiliki passion yang mendalam terhadap musik breakbeat, indobass, dan jungle dutch bandung. Setiap track yang saya produksi adalah cerminan dari perjalanan hidup dan emosi yang saya rasakan.</p>
+                    
+                    <div class="about-info">
+                        <div class="info-item">
+                            <span class="info-label">Umur:</span>
+                            <span>19 tahun</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Lokasi:</span>
+                            <span>Cipeundeuy, Bandung Barat</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Genre:</span>
+                            <span>Breakbeat, Indobass, Jungle</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Tujuan:</span>
+                            <span>Menjadi musisi legendaris</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="bg-slate-800 rounded-xl p-4 shadow hover:shadow-xl">
-          <img src="https://svgrepo.com/show/354195/youtube.svg" class="icon mb-2" alt="YouTube">
-          <h4 class="text-lg font-semibold mb-2">DJ DIE WITH A SMILE BREAKBEAT</h4>
-          <a href="https://youtu.be/g37Cn8ajC6M" class="text-blue-400 hover:underline" target="_blank">Tonton di YouTube</a>
+    </section>
+    
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Skills & Tools</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-sliders-h"></i></div>
+                    <h3>FL Studio</h3>
+                    <p>Digital Audio Workstation utama untuk produksi musik dan mixing</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-wave-square"></i></div>
+                    <h3>Audio Mixing</h3>
+                    <p>Kemampuan mixing dan mastering untuk menghasilkan kualitas audio terbaik</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-drum"></i></div>
+                    <h3>Beat Making</h3>
+                    <p>Spesialisasi dalam pembuatan beat breakbeat dan indobass</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-music"></i></div>
+                    <h3>DJ Performance</h3>
+                    <p>Kemampuan DJ untuk live performance dan mixing</p>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="py-24 px-6 bg-slate-900/60">
-    <div class="max-w-xl mx-auto text-center">
-      <h3 class="text-3xl font-bold mb-6 gradient-text">Kontak Saya</h3>
-      <div class="space-y-4">
-        <a href="mailto:akbarnawasunda@gmail.com" class="flex items-center gap-2 justify-center hover:text-blue-400">
-          <img src="https://svgrepo.com/show/303161/gmail-icon-logo.svg" class="icon"> akbarnawasunda@gmail.com
-        </a>
-        <a href="https://wa.me/6285183067309" class="flex items-center gap-2 justify-center hover:text-blue-400">
-          <img src="https://svgrepo.com/show/353644/whatsapp-icon.svg" class="icon"> WhatsApp
-        </a>
-        <a href="https://instagram.com/akbarnawasunda" class="flex items-center gap-2 justify-center hover:text-blue-400">
-          <img src="https://svgrepo.com/show/349530/instagram.svg" class="icon"> Instagram
-        </a>
-        <a href="https://open.spotify.com/artist/7KOQuIQLuxyklLox0RDMMw" class="flex items-center gap-2 justify-center hover:text-blue-400">
-          <img src="https://svgrepo.com/show/354051/spotify-icon.svg" class="icon"> Spotify
-        </a>
-        <a href="https://youtube.com/akbarnawasunda" class="flex items-center gap-2 justify-center hover:text-blue-400">
-          <img src="https://svgrepo.com/show/354195/youtube.svg" class="icon"> YouTube
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <footer class="text-center py-6 text-sm text-slate-500 bg-black border-t border-slate-700">
-    &copy; 2025 Akbar Nawasunda. All rights reserved.
-  </footer>
-
-  <script>
-    // Background bintang gerak
-    const canvas = document.getElementById('stars');
-    const ctx = canvas.getContext('2d');
-    let w, h;
-    let stars = [];
-    function resize() {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
-    }
-    function initStars(count) {
-      stars = [];
-      for (let i = 0; i < count; i++) {
-        stars.push({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          z: Math.random() * w
+    </section>
+    
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">Karya Unggulan</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-image"></div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">DJ TAK INGIN USAI BREAKBEAT</h3>
+                        <p>Sebuah karya breakbeat yang menggambarkan perasaan yang tidak ingin berakhir, dengan rhythm yang energik dan melodi yang menyentuh hati.</p>
+                        <a href="https://youtu.be/LaUzmxudvyI" class="portfolio-link" target="_blank">Dengarkan di YouTube <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image"></div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">DJ HARGAI AKU BREAKBEAT</h3>
+                        <p>Track yang mengekspresikan keinginan untuk dihargai, dikemas dalam beat breakbeat yang powerful dan emosional.</p>
+                        <a href="https://youtu.be/icYP_m18FYE" class="portfolio-link" target="_blank">Dengarkan di YouTube <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-image"></div>
+                    <div class="portfolio-content">
+                        <h3 class="portfolio-title">DJ DIE WITH A SMILE BREAKBEAT</h3>
+                        <p>Remix breakbeat yang menggabungkan emosi mendalam dengan energy yang tinggi, menciptakan pengalaman musik yang tak terlupakan.</p>
+                        <a href="https://youtu.be/g37Cn8ajC6M" class="portfolio-link" target="_blank">Dengarkan di YouTube <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Testimonials</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">"Musik Akbar selalu berhasil menggetarkan jiwa. Beat-nya yang khas dan energy yang luar biasa membuat setiap performance-nya tak terlupakan!"</div>
+                    <div class="testimonial-author">- Sarah M., Music Enthusiast</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">"Kolaborasi dengan Akbar memberikan hasil yang luar biasa. Profesionalisme dan kreativitasnya sangat menginspirasi."</div>
+                    <div class="testimonial-author">- Rendi K., Fellow Producer</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">"Akbar adalah produser muda yang sangat berbakat. Karyanya selalu fresh dan mengikuti perkembangan zaman."</div>
+                    <div class="testimonial-author">- Maya L., Event Organizer</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Hubungi Saya</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Mari Berkolaborasi!</h3>
+                    <p>Saya terbuka untuk kolaborasi musik, booking DJ, dan proyek kreatif lainnya. Jangan ragu untuk menghubungi saya!</p>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <span>akbarnawasunda@gmail.com</span>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <span>085183067309</span>
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <a href="https://instagram.com/akbarnawasunda" class="social-link" target="_blank">
+                        <div class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <span>Instagram</span>
+                    </a>
+                    
+                    <a href="https://wa.me/6285183067309" class="social-link" target="_blank">
+                        <div class="social-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <span>WhatsApp</span>
+                    </a>
+                    
+                    <a href="https://tiktok.com/@akbarnawasunda" class="social-link" target="_blank">
+                        <div class="social-icon">
+                            <i class="fab fa-tiktok"></i>
+                        </div>
+                        <span>TikTok</span>
+                    </a>
+                    
+                    <a href="https://youtube.com/@akbarnawasunda" class="social-link" target="_blank">
+                        <div class="social-icon">
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                        <span>YouTube</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <a href="#" class="download-cv">Download CV</a>
+            <div class="copyright">
+                &copy; 2023 Akbar Nawasunda. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Create animated background elements
+        const animatedBg = document.getElementById('animated-bg');
+        const colors = ['#6A0DAD', '#8A2BE2', '#FF0033', '#FF3366'];
+        
+        for (let i = 0; i < 20; i++) {
+            const element = document.createElement('div');
+            element.classList.add('bg-element');
+            
+            // Random size
+            const size = Math.random() * 150 + 50;
+            element.style.width = `${size}px`;
+            element.style.height = `${size}px`;
+            
+            // Random position
+            element.style.left = `${Math.random() * 100}%`;
+            element.style.top = `${Math.random() * 100}%`;
+            
+            // Random animation duration
+            element.style.animationDuration = `${Math.random() * 20 + 10}s`;
+            
+            // Random color
+            element.style.background = `linear-gradient(135deg, ${colors[Math.floor(Math.random() * colors.length)]}, ${colors[Math.floor(Math.random() * colors.length)]})`;
+            
+            animatedBg.appendChild(element);
+        }
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
         });
-      }
-    }
-    function animate() {
-      ctx.fillStyle = '#000000';
-      ctx.fillRect(0, 0, w, h);
-      for (let i = 0; i < stars.length; i++) {
-        let star = stars[i];
-        star.z -= 2;
-        if (star.z <= 0) {
-          star.z = w;
-        }
-        let k = 128.0 / star.z;
-        let x = star.x * k + w / 2;
-        let y = star.y * k + h / 2;
-        if (x >= 0 && x <= w && y >= 0 && y <= h) {
-          ctx.fillStyle = 'white';
-          ctx.fillRect(x, y, 1.5, 1.5);
-        }
-      }
-      requestAnimationFrame(animate);
-    }
-    window.addEventListener('resize', () => {
-      resize();
-      initStars(300);
-    });
-    resize();
-    initStars(300);
-    animate();
-  </script>
+        
+        // Add scroll animation to sections
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
 </body>
 </html>
