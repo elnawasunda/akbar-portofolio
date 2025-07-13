@@ -548,8 +548,38 @@
     <div id="star-background"></div>
     
     <!-- Header -->
+       /* Tambahan style baru */
+        .verified-badge {
+            color: #1da1f2;
+            font-size: 0.6em;
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        .logo-image {
+            height: 40px;
+            width: auto;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header dengan Logo Baru -->
     <header>
-        <a href="#" class="logo">AkbarNawasunda</a>
+        <a href="#" class="logo">
+            <img src="https://raw.githubusercontent.com/elnawasunda/akbar-portofolio/main/logo-akbar.png" alt="Akbar Nawasunda" class="logo-image">
+            <span>AkbarNawasunda</span>
+        </a>
         <div class="nav-menu">
             <a href="#about">Tentang</a>
             <a href="#discography">Diskografi</a>
@@ -563,10 +593,10 @@
         </div>
     </header>
     
-    <!-- Hero Section -->
+    <!-- Hero Section dengan Verified Badge -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Akbar Nawasunda</h1>
+            <h1>Akbar Nawasunda <span class="verified-badge"><i class="fas fa-check-circle"></i></span></h1>
             <h2>Produser Musik • DJ • Komposer</h2>
             <p>Membawa emosi dan pikiran ke dalam keindahan melodi yang abadi</p>
             <p class="quote">"slowly but surely"</p>
