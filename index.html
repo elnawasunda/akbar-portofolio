@@ -3,1002 +3,878 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akbar Nawasunda - Music Producer</title>
+    <title>Akbar Nawasunda | Produser Musik & DJ</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #0a0a1a;
+            --secondary: #1e1e2e;
+            --accent: #00a8ff;
+            --accent2: #ff2e63;
+            --text: #f0f0f0;
+            --text-secondary: #a0a0b0;
+        }
+        
+        .light-mode {
+            --primary: #f0f0f5;
+            --secondary: #ffffff;
+            --accent: #0077cc;
+            --accent2: #ff2e63;
+            --text: #1a1a2e;
+            --text-secondary: #4a4a5a;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-        
-        :root {
-            --purple-primary: #6A0DAD;
-            --purple-secondary: #8A2BE2;
-            --purple-light: #9B59B6;
-            --red-primary: #FF0033;
-            --red-secondary: #FF3366;
-            --dark-bg: #0A0A0A;
-            --darker-bg: #050505;
-            --card-bg: rgba(30, 10, 40, 0.6);
-            --text-light: #F0F0F0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
-            color: var(--text-light);
+            background: var(--primary);
+            color: var(--text);
             overflow-x: hidden;
             position: relative;
         }
         
-        /* Animated Background */
-        .animated-bg {
+        #star-background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d3a 25%, #0c0c1a 50%, #1a0a0a 100%);
             overflow: hidden;
         }
         
-        .bg-element {
+        .star {
             position: absolute;
-            background: linear-gradient(135deg, var(--purple-primary), var(--red-primary));
-            opacity: 0.1;
+            background-color: #fff;
             border-radius: 50%;
-            animation: float 15s infinite linear;
+            animation: twinkle var(--duration) linear infinite;
         }
         
-        @keyframes float {
-            0% {
-                transform: translateY(0) translateX(0) rotate(0deg);
-                opacity: 0.1;
-            }
-            50% {
-                opacity: 0.15;
-            }
-            100% {
-                transform: translateY(-100px) translateX(100px) rotate(360deg);
-                opacity: 0.1;
-            }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
         }
         
-        /* Header */
         header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(20, 5, 30, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(138, 43, 226, 0.2);
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        nav {
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            background: rgba(10, 10, 26, 0.8);
+            backdrop-filter: blur(10px);
         }
         
         .logo {
-            font-size: 24px;
-            font-weight: 800;
-            background: linear-gradient(45deg, var(--purple-secondary), var(--red-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 1px;
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-        
-        .nav-links a {
-            color: var(--text-light);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
             text-decoration: none;
-            transition: all 0.3s;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-menu a {
+            color: var(--text);
+            text-decoration: none;
             font-weight: 500;
+            transition: color 0.3s;
             position: relative;
-            padding: 5px 0;
         }
         
-        .nav-links a:hover {
-            color: var(--purple-secondary);
+        .nav-menu a:hover {
+            color: var(--accent);
         }
         
-        .nav-links a::after {
+        .nav-menu a::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -5px;
             left: 0;
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, var(--purple-secondary), var(--red-secondary));
+            background: var(--accent);
             transition: width 0.3s;
         }
         
-        .nav-links a:hover::after {
+        .nav-menu a:hover::after {
             width: 100%;
         }
         
-        /* Hero Section */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .theme-toggle {
+            background: var(--secondary);
+            border: none;
+            width: 50px;
+            height: 25px;
+            border-radius: 20px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .theme-toggle::before {
+            content: '';
+            position: absolute;
+            width: 19px;
+            height: 19px;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            background: var(--accent);
+            transition: transform 0.3s;
+        }
+        
+        .light-mode .theme-toggle::before {
+            transform: translateX(25px);
+        }
+        
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
+            padding: 0 2rem;
             position: relative;
             overflow: hidden;
         }
         
         .hero-content {
-            text-align: center;
-            animation: fadeInUp 1s ease-out;
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
-            position: relative;
-            z-index: 2;
+            text-align: center;
+            z-index: 10;
         }
         
         .hero h1 {
-            font-size: 4.5rem;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, var(--purple-secondary), var(--red-secondary));
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #00a8ff, #9c27b0, #ff2e63);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
-            line-height: 1.1;
-            text-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+            color: transparent;
+            animation: gradient-shift 8s infinite;
+        }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .hero h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text);
         }
         
         .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--text-secondary);
         }
         
-        .hero-quote {
-            font-size: 1.3rem;
+        .quote {
             font-style: italic;
-            color: var(--purple-secondary);
-            margin-bottom: 40px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .hero-quote::before, .hero-quote::after {
-            content: '"';
-            color: var(--red-secondary);
-            font-size: 1.8rem;
-            position: absolute;
-        }
-        
-        .hero-quote::before {
-            top: -10px;
-            left: -20px;
-        }
-        
-        .hero-quote::after {
-            bottom: -20px;
-            right: -20px;
-        }
-        
-        .cta-button {
-            display: inline-block;
-            padding: 16px 45px;
-            background: linear-gradient(45deg, var(--purple-primary), var(--red-primary));
-            color: #fff;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.4s;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            border: none;
-            font-size: 1.1rem;
-            box-shadow: 0 5px 20px rgba(138, 43, 226, 0.4);
-        }
-        
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 100%;
-            background: linear-gradient(45deg, var(--red-primary), var(--purple-primary));
-            transition: width 0.4s;
-            z-index: -1;
-        }
-        
-        .cta-button:hover::before {
-            width: 100%;
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255, 0, 51, 0.5);
-        }
-        
-        /* About Section */
-        .about {
-            padding: 120px 0;
-            position: relative;
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-top: 2rem;
         }
         
         .section-title {
             text-align: center;
-            font-size: 2.8rem;
-            margin-bottom: 70px;
-            background: linear-gradient(45deg, var(--purple-secondary), var(--red-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
             position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
         }
         
         .section-title::after {
             content: '';
             position: absolute;
-            bottom: -15px;
+            bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
+            width: 80px;
             height: 4px;
-            background: linear-gradient(90deg, var(--purple-secondary), var(--red-secondary));
+            background: var(--accent);
             border-radius: 2px;
         }
         
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 50px;
-            align-items: center;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
         }
         
-        .about-image {
-            width: 100%;
-            height: 400px;
-            background: linear-gradient(135deg, var(--purple-primary), var(--red-primary));
+        .discography {
+            background: rgba(30, 30, 46, 0.5);
+            padding: 4rem 0;
             border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .tracks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .track-card {
+            background: var(--secondary);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+        
+        .track-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .track-image {
+            height: 200px;
+            background: linear-gradient(45deg, #00a8ff, #9c27b0);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .track-info {
+            padding: 1.5rem;
+        }
+        
+        .track-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+        
+        .track-info p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .play-btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .play-btn:hover {
+            background: var(--accent2);
+        }
+        
+        .about-section {
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .profile-image {
+            flex: 1;
+            border-radius: 20px;
             overflow: hidden;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
         
-        .about-image::before {
-            content: '🎵';
-            font-size: 10rem;
-            opacity: 0.3;
-            position: absolute;
-            animation: rotate 20s linear infinite;
+        .profile-image img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
         
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        .about-content {
+            flex: 1;
         }
         
-        .about-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            opacity: 0.9;
+        .about-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
         }
         
-        .about-text p {
-            margin-bottom: 20px;
+        .about-content p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
         }
         
-        .about-info {
-            margin-top: 30px;
+        .info-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            gap: 1rem;
+            margin-top: 1.5rem;
         }
         
         .info-item {
-            display: flex;
-            background: rgba(50, 15, 70, 0.4);
-            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
             border-radius: 10px;
-            border-left: 3px solid var(--purple-secondary);
         }
         
-        .info-label {
-            color: var(--purple-secondary);
-            font-weight: 600;
-            width: 120px;
+        .info-item h4 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
         }
         
-        /* Skills Section */
-        .skills {
-            padding: 120px 0;
-            position: relative;
+        .skills-section {
+            margin-top: 4rem;
         }
         
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
         }
         
         .skill-card {
-            background: var(--card-bg);
-            padding: 40px 25px;
+            background: var(--secondary);
+            padding: 1.5rem;
             border-radius: 15px;
             text-align: center;
-            transition: all 0.4s;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(138, 43, 226, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--purple-secondary), var(--red-secondary));
-            transition: width 0.4s;
-        }
-        
-        .skill-card:hover::before {
-            width: 100%;
-            opacity: 0.1;
-        }
-        
-        .skill-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(138, 43, 226, 0.3);
-            border-color: rgba(138, 43, 226, 0.5);
-        }
-        
-        .skill-icon {
-            font-size: 3.5rem;
-            color: var(--purple-secondary);
-            margin-bottom: 25px;
-            transition: all 0.4s;
-        }
-        
-        .skill-card:hover .skill-icon {
-            color: var(--red-secondary);
-            transform: scale(1.1);
-        }
-        
-        .skill-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-        
-        /* Portfolio Section */
-        .portfolio {
-            padding: 120px 0;
-            position: relative;
-        }
-        
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-        
-        .portfolio-item {
-            background: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.4s;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(138, 43, 226, 0.2);
-            position: relative;
-        }
-        
-        .portfolio-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(138, 43, 226, 0.3);
-            border-color: rgba(138, 43, 226, 0.5);
-        }
-        
-        .portfolio-image {
-            height: 200px;
-            background: linear-gradient(135deg, var(--purple-primary), var(--red-primary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .portfolio-image::before {
-            content: '🎵';
-            font-size: 5rem;
-            position: absolute;
-            opacity: 0.3;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.2); opacity: 0.5; }
-            100% { transform: scale(1); opacity: 0.3; }
-        }
-        
-        .portfolio-content {
-            padding: 25px;
-        }
-        
-        .portfolio-title {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--purple-secondary);
-        }
-        
-        .portfolio-link {
-            display: inline-flex;
-            align-items: center;
-            margin-top: 15px;
-            color: var(--red-secondary);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        
-        .portfolio-link i {
-            margin-left: 8px;
             transition: transform 0.3s;
         }
         
-        .portfolio-link:hover {
-            color: var(--purple-secondary);
+        .skill-card:hover {
+            transform: translateY(-5px);
         }
         
-        .portfolio-link:hover i {
-            transform: translateX(5px);
+        .skill-card i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
         }
         
-        /* Contact Section */
-        .contact {
-            padding: 120px 0;
+        .testimonials {
+            background: rgba(30, 30, 46, 0.5);
+            padding: 4rem 0;
+            border-radius: 20px;
+            margin-top: 4rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background: var(--secondary);
+            padding: 2rem;
+            border-radius: 15px;
             position: relative;
         }
         
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            margin-top: 50px;
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--accent);
+            opacity: 0.2;
+            font-family: serif;
         }
         
-        .contact-info {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(138, 43, 226, 0.2);
+        .testimonial-card p {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-style: italic;
         }
         
-        .contact-item {
+        .testimonial-author {
             display: flex;
             align-items: center;
-            margin-bottom: 25px;
-            padding: 15px;
-            background: rgba(50, 15, 70, 0.3);
-            border-radius: 10px;
-            transition: all 0.3s;
+            gap: 1rem;
         }
         
-        .contact-item:hover {
-            background: rgba(80, 25, 110, 0.4);
-            transform: translateX(5px);
-        }
-        
-        .contact-icon {
-            width: 40px;
-            height: 40px;
-            margin-right: 15px;
-            color: var(--purple-secondary);
-            font-size: 1.5rem;
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent);
             display: flex;
             align-items: center;
             justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .author-info h4 {
+            color: var(--accent);
+        }
+        
+        .author-info p {
+            color: var(--text-secondary);
+            font-style: normal;
+            margin: 0;
+        }
+        
+        .fun-facts {
+            margin-top: 4rem;
+        }
+        
+        .facts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .fact-card {
+            background: var(--secondary);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .fact-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .fact-card i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        
+        .contact {
+            background: linear-gradient(135deg, var(--primary), #000033);
+            padding: 5rem 0;
+            text-align: center;
         }
         
         .social-links {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
         }
         
         .social-link {
             display: flex;
             align-items: center;
-            padding: 20px;
-            background: var(--card-bg);
-            border-radius: 10px;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--secondary);
+            color: var(--text);
+            font-size: 1.5rem;
+            transition: transform 0.3s, background 0.3s;
             text-decoration: none;
-            color: #fff;
-            transition: all 0.4s;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(138, 43, 226, 0.2);
         }
         
         .social-link:hover {
-            background: linear-gradient(45deg, var(--purple-primary), var(--red-primary));
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.3);
+            background: var(--accent);
         }
         
-        .social-icon {
-            width: 30px;
-            height: 30px;
-            margin-right: 15px;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        /* Testimonials */
-        .testimonials {
-            padding: 120px 0;
-            position: relative;
-        }
-        
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-        
-        .testimonial-card {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            transition: all 0.4s;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(138, 43, 226, 0.2);
-        }
-        
-        .testimonial-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(138, 43, 226, 0.2);
-        }
-        
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            position: relative;
-        }
-        
-        .testimonial-text::before {
-            content: '"';
-            color: var(--purple-secondary);
-            font-size: 3rem;
-            position: absolute;
-            top: -20px;
-            left: -10px;
-            opacity: 0.3;
-        }
-        
-        .testimonial-author {
-            color: var(--purple-secondary);
-            font-weight: bold;
-        }
-        
-        /* Footer */
         footer {
-            background: rgba(10, 5, 15, 0.95);
-            padding: 70px 0 30px;
+            background: rgba(10, 10, 26, 0.9);
+            padding: 2rem;
             text-align: center;
-            border-top: 1px solid rgba(138, 43, 226, 0.2);
-        }
-        
-        .download-cv {
-            display: inline-block;
-            padding: 15px 40px;
-            background: linear-gradient(45deg, var(--purple-primary), var(--red-primary));
-            color: #fff;
-            text-decoration: none;
-            border-radius: 50px;
-            margin-bottom: 40px;
-            font-weight: 600;
-            transition: all 0.4s;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-        
-        .download-cv::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 100%;
-            background: linear-gradient(45deg, var(--red-primary), var(--purple-primary));
-            transition: width 0.4s;
-            z-index: -1;
-        }
-        
-        .download-cv:hover::before {
-            width: 100%;
-        }
-        
-        .download-cv:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255, 0, 51, 0.4);
-        }
-        
-        .copyright {
-            margin-top: 30px;
-            color: var(--purple-light);
-            font-size: 0.9rem;
-        }
-        
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .fade-in {
-            animation: fadeInUp 1s ease-out;
-        }
-        
-        /* Responsive */
-        @media (max-width: 992px) {
-            .hero h1 {
-                font-size: 3.5rem;
-            }
-            
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .about-image {
-                max-width: 400px;
-                margin: 0 auto;
-            }
-            
-            .contact-content {
-                grid-template-columns: 1fr;
-            }
+            color: var(--text-secondary);
         }
         
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: var(--secondary);
+                width: 80%;
+                height: calc(100vh - 70px);
+                padding: 2rem;
+                transition: right 0.3s;
+                gap: 1.5rem;
+            }
+            
+            .nav-menu.active {
+                right: 0;
             }
             
             .hero h1 {
-                font-size: 2.8rem;
+                font-size: 2.5rem;
             }
             
-            .hero p {
-                font-size: 1.2rem;
+            .hero h2 {
+                font-size: 1.5rem;
             }
             
-            .portfolio-grid {
+            .about-section {
+                flex-direction: column;
+            }
+            
+            .info-grid {
                 grid-template-columns: 1fr;
-            }
-            
-            .section-title {
-                font-size: 2.3rem;
-            }
-            
-            .about-info {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2.3rem;
-            }
-            
-            .hero-quote {
-                font-size: 1.1rem;
-            }
-            
-            .cta-button {
-                padding: 14px 35px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Animated Background Elements -->
-    <div class="animated-bg" id="animated-bg"></div>
+    <!-- Starry Background -->
+    <div id="star-background"></div>
     
+    <!-- Header -->
     <header>
-        <nav class="container">
-            <div class="logo">Akbar Nawasunda</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#testimonials">Testimonials</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+        <a href="#" class="logo">AkbarNawasunda</a>
+        <div class="nav-menu">
+            <a href="#about">Tentang</a>
+            <a href="#discography">Diskografi</a>
+            <a href="#skills">Skills</a>
+            <a href="#testimonials">Testimoni</a>
+            <a href="#contact">Kontak</a>
+        </div>
+        <button class="theme-toggle" id="themeToggle"></button>
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
     </header>
     
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Akbar Nawasunda</h1>
-                <p>Music Producer | DJ | Composer</p>
-                <div class="hero-quote">slowly but surely</div>
-                <a href="#portfolio" class="cta-button">Dengarkan Karya Saya</a>
-            </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Akbar Nawasunda</h1>
+            <h2>Produser Musik • DJ • Komposer</h2>
+            <p>Membawa emosi dan pikiran ke dalam keindahan melodi yang abadi</p>
+            <p class="quote">"slowly but surely"</p>
         </div>
     </section>
     
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">Tentang Saya</h2>
+    <!-- About Section -->
+    <section class="container" id="about">
+        <h2 class="section-title">Tentang Saya</h2>
+        <div class="about-section">
+            <div class="profile-image">
+                <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Akbar Nawasunda">
+            </div>
             <div class="about-content">
-                <div class="about-image">
-                    <!-- Music note will be generated via CSS -->
-                </div>
-                <div class="about-text">
-                    <p>Alasan saya ingin menjadi produser musik adalah karena saya ingin hidup saya ditulis dalam lagu. Lagu itu menurut saya adalah ekspresi, emosi, dan pikiran yang disatukan menjadi sebuah keindahan dalam melodi.</p>
-                    
-                    <p>Saya memiliki passion yang mendalam terhadap musik breakbeat, indobass, dan jungle dutch bandung. Setiap track yang saya produksi adalah cerminan dari perjalanan hidup dan emosi yang saya rasakan.</p>
-                    
-                    <div class="about-info">
-                        <div class="info-item">
-                            <span class="info-label">Umur:</span>
-                            <span>19 tahun</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Lokasi:</span>
-                            <span>Cipeundeuy, Bandung Barat</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Genre:</span>
-                            <span>Breakbeat, Indobass, Jungle</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Tujuan:</span>
-                            <span>Menjadi musisi legendaris</span>
-                        </div>
+                <h2>Idel Akbar Ramadan</h2>
+                <p>Hidup saya adalah sebuah lagu yang terus ditulis, di mana setiap melodi adalah ekspresi emosi dan pikiran yang disatukan menjadi keindahan. Sebagai produser musik, DJ, dan komposer, saya berdedikasi untuk menciptakan karya yang menggetarkan jiwa.</p>
+                
+                <div class="info-grid">
+                    <div class="info-item">
+                        <h4>Umur</h4>
+                        <p>19 Tahun</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>Lokasi</h4>
+                        <p>Cipeundeuy, Bandung Barat, Jawa Barat</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>Genre</h4>
+                        <p>Breakbeat, Indobass, Jungle Dutch Bandung</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>Mimpi</h4>
+                        <p>Menjadi Musisi Legendaris</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    
-    <section id="skills" class="skills">
-        <div class="container">
+        
+        <!-- Skills Section -->
+        <div class="skills-section" id="skills">
             <h2 class="section-title">Skills & Tools</h2>
             <div class="skills-grid">
                 <div class="skill-card">
-                    <div class="skill-icon"><i class="fas fa-sliders-h"></i></div>
+                    <i class="fas fa-music"></i>
+                    <h3>Produksi Musik</h3>
+                    <p>Menciptakan komposisi orisinal</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-sliders-h"></i>
+                    <h3>Mixing & Mastering</h3>
+                    <p>Pengolahan suara profesional</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-drum"></i>
+                    <h3>Sound Design</h3>
+                    <p>Mendesain suara unik</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-fl-studio"></i>
                     <h3>FL Studio</h3>
-                    <p>Digital Audio Workstation utama untuk produksi musik dan mixing</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon"><i class="fas fa-wave-square"></i></div>
-                    <h3>Audio Mixing</h3>
-                    <p>Kemampuan mixing dan mastering untuk menghasilkan kualitas audio terbaik</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon"><i class="fas fa-drum"></i></div>
-                    <h3>Beat Making</h3>
-                    <p>Spesialisasi dalam pembuatan beat breakbeat dan indobass</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon"><i class="fas fa-music"></i></div>
-                    <h3>DJ Performance</h3>
-                    <p>Kemampuan DJ untuk live performance dan mixing</p>
+                    <p>Software utama produksi</p>
                 </div>
             </div>
         </div>
     </section>
     
-    <section id="portfolio" class="portfolio">
-        <div class="container">
-            <h2 class="section-title">Karya Unggulan</h2>
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <div class="portfolio-image"></div>
-                    <div class="portfolio-content">
-                        <h3 class="portfolio-title">DJ TAK INGIN USAI BREAKBEAT</h3>
-                        <p>Sebuah karya breakbeat yang menggambarkan perasaan yang tidak ingin berakhir, dengan rhythm yang energik dan melodi yang menyentuh hati.</p>
-                        <a href="https://youtu.be/LaUzmxudvyI" class="portfolio-link" target="_blank">Dengarkan di YouTube <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image"></div>
-                    <div class="portfolio-content">
-                        <h3 class="portfolio-title">DJ HARGAI AKU BREAKBEAT</h3>
-                        <p>Track yang mengekspresikan keinginan untuk dihargai, dikemas dalam beat breakbeat yang powerful dan emosional.</p>
-                        <a href="https://youtu.be/icYP_m18FYE" class="portfolio-link" target="_blank">Dengarkan di YouTube <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-image"></div>
-                    <div class="portfolio-content">
-                        <h3 class="portfolio-title">DJ DIE WITH A SMILE BREAKBEAT</h3>
-                        <p>Remix breakbeat yang menggabungkan emosi mendalam dengan energy yang tinggi, menciptakan pengalaman musik yang tak terlupakan.</p>
-                        <a href="https://youtu.be/g37Cn8ajC6M" class="portfolio-link" target="_blank">Dengarkan di YouTube <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section id="testimonials" class="testimonials">
-        <div class="container">
-            <h2 class="section-title">Testimonials</h2>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-text">"Musik Akbar selalu berhasil menggetarkan jiwa. Beat-nya yang khas dan energy yang luar biasa membuat setiap performance-nya tak terlupakan!"</div>
-                    <div class="testimonial-author">- Sarah M., Music Enthusiast</div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-text">"Kolaborasi dengan Akbar memberikan hasil yang luar biasa. Profesionalisme dan kreativitasnya sangat menginspirasi."</div>
-                    <div class="testimonial-author">- Rendi K., Fellow Producer</div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-text">"Akbar adalah produser muda yang sangat berbakat. Karyanya selalu fresh dan mengikuti perkembangan zaman."</div>
-                    <div class="testimonial-author">- Maya L., Event Organizer</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Hubungi Saya</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Mari Berkolaborasi!</h3>
-                    <p>Saya terbuka untuk kolaborasi musik, booking DJ, dan proyek kreatif lainnya. Jangan ragu untuk menghubungi saya!</p>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <span>akbarnawasunda@gmail.com</span>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <span>085183067309</span>
+    <!-- Discography Section -->
+    <section class="container" id="discography">
+        <h2 class="section-title">Diskografi</h2>
+        <div class="discography">
+            <div class="tracks-grid">
+                <!-- Track 1 -->
+                <div class="track-card">
+                    <div class="track-image" style="background: linear-gradient(45deg, #ff2e63, #9c27b0);"></div>
+                    <div class="track-info">
+                        <h3>DJ TAK INGIN USAI BREAKBEAT</h3>
+                        <p>Remix energik dengan beat yang menghipnotis</p>
+                        <a href="https://youtu.be/LaUzmxudvyI" class="play-btn" target="_blank">Dengarkan</a>
                     </div>
                 </div>
                 
-                <div class="social-links">
-                    <a href="https://instagram.com/akbarnawasunda" class="social-link" target="_blank">
-                        <div class="social-icon">
-                            <i class="fab fa-instagram"></i>
-                        </div>
-                        <span>Instagram</span>
-                    </a>
-                    
-                    <a href="https://wa.me/6285183067309" class="social-link" target="_blank">
-                        <div class="social-icon">
-                            <i class="fab fa-whatsapp"></i>
-                        </div>
-                        <span>WhatsApp</span>
-                    </a>
-                    
-                    <a href="https://tiktok.com/@akbarnawasunda" class="social-link" target="_blank">
-                        <div class="social-icon">
-                            <i class="fab fa-tiktok"></i>
-                        </div>
-                        <span>TikTok</span>
-                    </a>
-                    
-                    <a href="https://youtube.com/@akbarnawasunda" class="social-link" target="_blank">
-                        <div class="social-icon">
-                            <i class="fab fa-youtube"></i>
-                        </div>
-                        <span>YouTube</span>
-                    </a>
+                <!-- Track 2 -->
+                <div class="track-card">
+                    <div class="track-image" style="background: linear-gradient(45deg, #00a8ff, #4cd137);"></div>
+                    <div class="track-info">
+                        <h3>DJ HARGAI AKU BREAKBEAT</h3>
+                        <p>Harmoni emosional dengan ritme yang kuat</p>
+                        <a href="https://youtu.be/icYP_m18FYE" class="play-btn" target="_blank">Dengarkan</a>
+                    </div>
+                </div>
+                
+                <!-- Track 3 -->
+                <div class="track-card">
+                    <div class="track-image" style="background: linear-gradient(45deg, #fbc531, #e84118);"></div>
+                    <div class="track-info">
+                        <h3>DJ DIE WITH A SMILE BREAKBEAT</h3>
+                        <p>Melodi yang menyentuh hati dengan beat khas</p>
+                        <a href="https://youtu.be/g37Cn8ajC6M" class="play-btn" target="_blank">Dengarkan</a>
+                    </div>
+                </div>
+                
+                <!-- Track 4 -->
+                <div class="track-card">
+                    <div class="track-image" style="background: linear-gradient(45deg, #8c7ae6, #00a8ff);"></div>
+                    <div class="track-info">
+                        <h3>ROSE & Bruno Mars - APT 2024 [Remix]</h3>
+                        <p>Kolaborasi unik dengan sentuhan personal</p>
+                        <a href="https://on.soundcloud.com/e8DrmGThgY7Xs77rVs" class="play-btn" target="_blank">Dengarkan</a>
+                    </div>
+                </div>
+                
+                <!-- Track 5 -->
+                <div class="track-card">
+                    <div class="track-image" style="background: linear-gradient(45deg, #4cd137, #0097e6);"></div>
+                    <div class="track-info">
+                        <h3>Bayang Tanpa Kata</h3>
+                        <p>Lagu orisinal dengan lirik mendalam</p>
+                        <a href="https://open.spotify.com/track/5mJllAYnpnYkXWQOOWsywt?si=DFmfmZ0IQL6MG8lg6EIE4g" class="play-btn" target="_blank">Dengarkan</a>
+                    </div>
+                </div>
+                
+                <!-- Track 6 -->
+                <div class="track-card">
+                    <div class="track-image" style="background: linear-gradient(45deg, #e84118, #fbc531);"></div>
+                    <div class="track-info">
+                        <h3>Yang Tak Pernah Usai</h3>
+                        <p>Melodi yang abadi dalam ingatan</p>
+                        <a href="https://open.spotify.com/track/2MFhrB5wnRhCaICNxQ2nox?si=ooGEf_j_R7OD4DGNh_0XyQ" class="play-btn" target="_blank">Dengarkan</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
     
-    <footer>
-        <div class="container">
-            <a href="#" class="download-cv">Download CV</a>
-            <div class="copyright">
-                &copy; 2023 Akbar Nawasunda. All Rights Reserved.
+    <!-- Testimonials Section -->
+    <section class="container" id="testimonials">
+        <h2 class="section-title">Testimoni</h2>
+        <div class="testimonials">
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p>"Akbar memiliki pendekatan unik dalam menciptakan musik. Kemampuannya menggabungkan berbagai elemen musik menghasilkan karya yang luar biasa."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JV</div>
+                        <div class="author-info">
+                            <h4>Jose Valino Algie</h4>
+                            <p>Produser Musik</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p>"Remix yang dibuat Akbar selalu memberikan sentuhan segar pada lagu-lagu populer. Dia benar-benar memahami apa yang didengar oleh pendengarnya."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MR</div>
+                        <div class="author-info">
+                            <h4>Maria Rodriguez</h4>
+                            <p>Event Organizer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p>"Saya selalu terkesan dengan bagaimana Akbar bisa menciptakan atmosfer yang kuat dalam setiap karyanya. Dia adalah talenta yang patut diperhitungkan."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">TS</div>
+                        <div class="author-info">
+                            <h4>Thomas Surya</h4>
+                            <p>DJ Senior</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
+    
+    <!-- Fun Facts Section -->
+    <section class="container">
+        <h2 class="section-title">Fun Facts</h2>
+        <div class="fun-facts">
+            <div class="facts-grid">
+                <div class="fact-card">
+                    <i class="fas fa-headphones"></i>
+                    <h3>10.000+</h3>
+                    <p>Jam Mendengarkan Musik</p>
+                </div>
+                
+                <div class="fact-card">
+                    <i class="fas fa-moon"></i>
+                    <h3>Night Owl</h3>
+                    <p>Kreativitas Terbaik di Malam Hari</p>
+                </div>
+                
+                <div class="fact-card">
+                    <i class="fas fa-coffee"></i>
+                    <h3>Pecinta Kopi</h3>
+                    <p>Minimal 3 Cangkir Sehari</p>
+                </div>
+                
+                <div class="fact-card">
+                    <i class="fas fa-globe-asia"></i>
+                    <h3>Lokalitas</h3>
+                    <p>Bangga dengan Musik Lokal Bandung</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Terhubung Dengan Saya</h2>
+            <p>Tertarik berkolaborasi atau sekadar menyapa? Jangan ragu untuk menghubungi saya!</p>
+            
+            <div class="social-links">
+                <a href="https://wa.me/6285183067309" class="social-link" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://instagram.com/akbarnawasunda" class="social-link" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://tiktok.com/akbarnawasunda" class="social-link" target="_blank">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="https://youtube.com/akbarnawasunda" class="social-link" target="_blank">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://open.spotify.com/artist/7KOQuIQLuxyklLox0RDMMw" class="social-link" target="_blank">
+                    <i class="fab fa-spotify"></i>
+                </a>
+                <a href="https://music.apple.com/id/artist/akbar-nawasunda/1816312738" class="social-link" target="_blank">
+                    <i class="fab fa-apple"></i>
+                </a>
+                <a href="mailto:akbarnawasunda@gmail.com" class="social-link">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Akbar Nawasunda. All Rights Reserved.</p>
+        <p>slowly but surely</p>
     </footer>
     
     <script>
-        // Create animated background elements
-        const animatedBg = document.getElementById('animated-bg');
-        const colors = ['#6A0DAD', '#8A2BE2', '#FF0033', '#FF3366'];
-        
-        for (let i = 0; i < 20; i++) {
-            const element = document.createElement('div');
-            element.classList.add('bg-element');
+        // Create stars
+        function createStars() {
+            const container = document.getElementById('star-background');
+            const starsCount = 150;
             
-            // Random size
-            const size = Math.random() * 150 + 50;
-            element.style.width = `${size}px`;
-            element.style.height = `${size}px`;
-            
-            // Random position
-            element.style.left = `${Math.random() * 100}%`;
-            element.style.top = `${Math.random() * 100}%`;
-            
-            // Random animation duration
-            element.style.animationDuration = `${Math.random() * 20 + 10}s`;
-            
-            // Random color
-            element.style.background = `linear-gradient(135deg, ${colors[Math.floor(Math.random() * colors.length)]}, ${colors[Math.floor(Math.random() * colors.length)]})`;
-            
-            animatedBg.appendChild(element);
+            for (let i = 0; i < starsCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Random position
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                star.style.left = `${x}%`;
+                star.style.top = `${y}%`;
+                
+                // Random size
+                const size = Math.random() * 3;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Random animation duration
+                const duration = Math.random() * 10 + 5;
+                star.style.setProperty('--duration', `${duration}s`);
+                
+                container.appendChild(star);
+            }
         }
         
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            
+            // Save preference
+            const isLightMode = document.body.classList.contains('light-mode');
+            localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
+        });
+        
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
             });
         });
         
-        // Add scroll animation to sections
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-        
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            
+            // Load saved theme
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+            }
         });
     </script>
 </body>
