@@ -1,139 +1,126 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akbar Nawasunda - Portofolio Musik</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { font-family: 'Inter', sans-serif; }
-        html { scroll-behavior: smooth; }
-        body {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            min-height: 100vh;
-            color: #f1f5f9;
-        }
-        .gradient-text {
-            background: linear-gradient(135deg, #60a5fa, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .icon {
-            width: 24px;
-            height: 24px;
-            display: inline-block;
-        }
-        .section {
-            padding: 5rem 1rem;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Akbar Nawasunda - Music Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      font-family: 'Orbitron', sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      background: radial-gradient(circle at top, #2e1065, #1e3a8a, #000000);
+      color: #e0e7ff;
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+    .gradient-text {
+      background: linear-gradient(to right, #9333ea, #3b82f6, #ef4444);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="fixed top-0 left-0 w-full bg-slate-900/80 backdrop-blur-md shadow z-50">
-        <div class="max-w-7xl mx-auto flex items-center justify-between p-4">
-            <div class="flex items-center gap-4">
-                <img src="logo.png" alt="Logo" class="w-10 h-10">
-                <span class="font-bold text-xl gradient-text">Akbar Nawasunda</span>
-            </div>
-            <div class="hidden md:flex gap-6">
-                <a href="#home" class="hover:text-blue-400">Home</a>
-                <a href="#about" class="hover:text-blue-400">Tentang</a>
-                <a href="#works" class="hover:text-blue-400">Karya</a>
-                <a href="#contact" class="hover:text-blue-400">Kontak</a>
-            </div>
-        </div>
-    </nav><!-- Hero -->
-<section id="home" class="section pt-32 text-center">
-    <img src="foto1.jpg" alt="Foto Akbar" class="w-40 h-40 rounded-full mx-auto mb-6 border-4 border-blue-400">
-    <h1 class="text-5xl font-bold mb-2 gradient-text">Akbar Nawasunda</h1>
-    <p class="text-xl text-slate-300">Produser Musik • DJ • Komposer</p>
-    <p class="italic text-slate-400">"slowly but surely"</p>
-</section>
+  <canvas id="stars"></canvas>
+  <header class="text-center pt-24 pb-10">
+    <h1 class="text-5xl font-bold gradient-text">Akbar Nawasunda</h1>
+    <p class="text-xl mt-2">Produser Musik • DJ • Komposer</p>
+    <p class="italic text-slate-300 mt-1">"slowly but surely"</p>
+  </header>
 
-<!-- About -->
-<section id="about" class="section bg-slate-800/60">
-    <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8">
-        <div>
-            <h2 class="text-3xl font-bold mb-4 gradient-text">Tentang Saya</h2>
-            <p class="mb-3">Umur: 19 tahun</p>
-            <p class="mb-3">Lokasi: Cipeundeuy, Bandung Barat</p>
-            <p class="mb-3">Genre Favorit: Breakbeat, Indobass, Jungle Dutch Bandung</p>
-            <p class="mb-3">Tujuan: Menjadi musisi legendaris</p>
-            <p class="mt-6 italic text-slate-300">"Alasan gua jadi produser musik itu karena gua mau hidup gua ditulis dalam lagu. Lagu itu ekspresi, emosi, dan pikiran yang disatukan dalam melodi."</p>
-        </div>
-        <div>
-            <h2 class="text-3xl font-bold mb-4 gradient-text">Tools & Software</h2>
-            <ul class="list-disc list-inside space-y-2">
-                <li>FL Studio</li>
-            </ul>
-            <h2 class="text-3xl font-bold mt-8 mb-4 gradient-text">Fun Fact</h2>
-            <ul class="list-disc list-inside space-y-2">
-                <li>Suka suara bass lebih dari alarm</li>
-                <li>Bisa mixing sambil ngopi tanpa tumpah</li>
-            </ul>
-        </div>
-    </div>
-</section>
+  <main class="max-w-4xl mx-auto px-4">
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-4 gradient-text">Tentang Saya</h2>
+      <ul class="space-y-2 text-slate-200">
+        <li><strong>Umur:</strong> 19 tahun</li>
+        <li><strong>Lokasi:</strong> Cipeundeuy, Bandung Barat</li>
+        <li><strong>Genre Favorit:</strong> Breakbeat, Indobass, Jungle Dutch Bandung</li>
+        <li><strong>Tujuan:</strong> Menjadi musisi legendaris</li>
+        <li class="italic mt-3">"Alasan gua jadi produser musik itu karena gua mau hidup gua ditulis dalam lagu. Lagu itu ekspresi, emosi, dan pikiran yang disatukan dalam melodi."</li>
+      </ul>
+    </section>
 
-<!-- Works -->
-<section id="works" class="section">
-    <h2 class="text-3xl font-bold text-center mb-12 gradient-text">Karya-Karya</h2>
-    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
-        <div class="bg-slate-700 p-4 rounded-xl shadow">
-            <img src="youtube.svg" alt="YouTube" class="icon mb-2">
-            <h3 class="text-xl font-bold mb-2 text-blue-400">DJ TAK INGIN USAI BREAKBEAT</h3>
-            <a href="https://youtu.be/LaUzmxudvyI" target="_blank" class="text-blue-300 hover:underline">Tonton di YouTube</a>
+    <section class="mb-16">
+      <h2 class="text-3xl font-bold mb-4 gradient-text">Karya Unggulan</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-slate-800 p-4 rounded-xl text-center">
+          <h3 class="font-bold text-blue-400">DJ TAK INGIN USAI</h3>
+          <a href="https://youtu.be/LaUzmxudvyI" target="_blank" class="text-blue-300 hover:underline text-sm">Tonton di YouTube</a>
         </div>
-        <div class="bg-slate-700 p-4 rounded-xl shadow">
-            <img src="youtube.svg" alt="YouTube" class="icon mb-2">
-            <h3 class="text-xl font-bold mb-2 text-blue-400">DJ HARGAI AKU BREAKBEAT</h3>
-            <a href="https://youtu.be/icYP_m18FYE" target="_blank" class="text-blue-300 hover:underline">Tonton di YouTube</a>
+        <div class="bg-slate-800 p-4 rounded-xl text-center">
+          <h3 class="font-bold text-blue-400">DJ HARGAI AKU</h3>
+          <a href="https://youtu.be/icYP_m18FYE" target="_blank" class="text-blue-300 hover:underline text-sm">Tonton di YouTube</a>
         </div>
-        <div class="bg-slate-700 p-4 rounded-xl shadow">
-            <img src="youtube.svg" alt="YouTube" class="icon mb-2">
-            <h3 class="text-xl font-bold mb-2 text-blue-400">DJ DIE WITH A SMILE BREAKBEAT</h3>
-            <a href="https://youtu.be/g37Cn8ajC6M" target="_blank" class="text-blue-300 hover:underline">Tonton di YouTube</a>
+        <div class="bg-slate-800 p-4 rounded-xl text-center">
+          <h3 class="font-bold text-blue-400">DJ DIE WITH A SMILE</h3>
+          <a href="https://youtu.be/g37Cn8ajC6M" target="_blank" class="text-blue-300 hover:underline text-sm">Tonton di YouTube</a>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
 
-<!-- Contact -->
-<section id="contact" class="section bg-slate-800/60">
-    <h2 class="text-3xl font-bold text-center mb-8 gradient-text">Kontak Saya</h2>
-    <div class="max-w-xl mx-auto flex flex-col gap-4 items-center">
-        <a href="mailto:akbarnawasunda@gmail.com" class="flex items-center gap-2 hover:text-blue-400">
-            <img src="article.svg" class="icon"> akbarnawasunda@gmail.com
-        </a>
-        <a href="https://wa.me/6285183067309" class="flex items-center gap-2 hover:text-blue-400">
-            <img src="whatsapp.svg" class="icon"> WhatsApp
-        </a>
-        <a href="https://instagram.com/akbarnawasunda" class="flex items-center gap-2 hover:text-blue-400">
-            <img src="instagram.svg" class="icon"> Instagram
-        </a>
-        <a href="https://youtube.com/akbarnawasunda" class="flex items-center gap-2 hover:text-blue-400">
-            <img src="youtube.svg" class="icon"> YouTube
-        </a>
-        <a href="https://open.spotify.com/artist/7KOQuIQLuxyklLox0RDMMw" class="flex items-center gap-2 hover:text-blue-400">
-            <img src="spotify.svg" class="icon"> Spotify
-        </a>
-        <a href="https://music.apple.com/artist/akbar-nawasunda" class="flex items-center gap-2 hover:text-blue-400">
-            <img src="applemusic.svg" class="icon"> Apple Music
-        </a>
-        <a href="https://medium.com/@akbarnawasunda" class="flex items-center gap-2 hover:text-blue-400">
-            <img src="medium.svg" class="icon"> Medium
-        </a>
-        <a href="https://tiktok.com/@akbarnawasunda" class="flex items-center gap-2 hover:text-blue-400">
-            <img src="tiktok.svg" class="icon"> TikTok
-        </a>
-    </div>
-</section>
+    <section class="mb-20">
+      <h2 class="text-3xl font-bold mb-4 gradient-text">Kontak & Sosial Media</h2>
+      <div class="flex flex-wrap gap-4">
+        <a href="https://wa.me/6285183067309" target="_blank" class="hover:text-green-400">WhatsApp</a>
+        <a href="https://instagram.com/akbarnawasunda" target="_blank" class="hover:text-pink-400">Instagram</a>
+        <a href="https://youtube.com/akbarnawasunda" target="_blank" class="hover:text-red-500">YouTube</a>
+        <a href="https://open.spotify.com/artist/7KOQuIQLuxyklLox0RDMMw" target="_blank" class="hover:text-green-300">Spotify</a>
+        <a href="mailto:akbarnawasunda@gmail.com" class="hover:text-blue-300">Email</a>
+      </div>
+    </section>
+  </main>
 
-<!-- Footer -->
-<footer class="text-center py-6 bg-slate-900 mt-8 border-t border-slate-700">
-    <p class="text-sm text-slate-500">&copy; 2025 Akbar Nawasunda. All rights reserved.</p>
-</footer>
+  <footer class="text-center pb-10 text-sm text-slate-400">&copy; 2025 Akbar Nawasunda. All rights reserved.</footer>
 
+  <!-- Star background animation -->
+  <script>
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    for (let i = 0; i < 150; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 1.2,
+        speed: Math.random() * 0.5 + 0.2,
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let star of stars) {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "#ffffff";
+        ctx.fill();
+        star.y += star.speed;
+        if (star.y > canvas.height) {
+          star.y = 0;
+          star.x = Math.random() * canvas.width;
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  </script>
 </body>
 </html>
