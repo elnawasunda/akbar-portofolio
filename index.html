@@ -3,30 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akbar Nawasunda | Music Producer & Composer</title>
+    <title>Akbar Nawasunda | Produser Musik & DJ Profesional</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js"></script>
     <style>
         :root {
-            --primary: #121212;
-            --secondary: #1e1e1e;
+            --primary: #0a0a1a;
+            --secondary: #1a1a2e;
             --accent: #00a8ff;
             --accent2: #ff2e63;
             --text: #ffffff;
-            --text-secondary: #b0b0b0;
-            --card-bg: rgba(40, 40, 40, 0.6);
+            --text-secondary: #a0a0b0;
+            --card-bg: rgba(30, 30, 46, 0.4);
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             --glass: rgba(255, 255, 255, 0.08);
         }
         
         .light-mode {
-            --primary: #f0f0f0;
+            --primary: #f5f5f7;
             --secondary: #ffffff;
             --accent: #0077cc;
             --accent2: #ff2e63;
-            --text: #222222;
-            --text-secondary: #555555;
-            --card-bg: rgba(255, 255, 255, 0.7);
+            --text: #1a1a2e;
+            --text-secondary: #4a4a5a;
+            --card-bg: rgba(255, 255, 255, 0.6);
             --glass: rgba(255, 255, 255, 0.5);
         }
         
@@ -83,25 +85,10 @@
             align-items: center;
             gap: 15px;
             text-decoration: none;
-        }
-        
-        .logo-text {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .logo-name {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 800;
             color: var(--accent);
             letter-spacing: -0.5px;
-            line-height: 1;
-        }
-        
-        .logo-subtitle {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            letter-spacing: 1px;
         }
         
         .logo img {
@@ -158,49 +145,31 @@
             gap: 20px;
         }
         
-        .language-switcher {
-            position: relative;
-        }
-        
-        .language-btn {
-            background: transparent;
-            border: none;
-            color: var(--text);
-            font-size: 1rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .language-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
+        .theme-toggle {
             background: var(--secondary);
-            border-radius: 8px;
-            padding: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            display: none;
-            min-width: 120px;
-            z-index: 100;
+            border: none;
+            width: 60px;
+            height: 30px;
+            border-radius: 30px;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
         
-        .language-dropdown a {
-            display: block;
-            color: var(--text);
-            text-decoration: none;
-            padding: 8px 12px;
-            border-radius: 4px;
-            transition: background 0.3s;
+        .theme-toggle::before {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            background: var(--accent);
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         }
         
-        .language-dropdown a:hover {
-            background: rgba(0, 168, 255, 0.1);
-        }
-        
-        .language-switcher:hover .language-dropdown {
-            display: block;
+        .light-mode .theme-toggle::before {
+            transform: translateX(30px);
         }
         
         /* Hero Section */
@@ -211,18 +180,15 @@
             padding: 150px 0 100px;
             position: relative;
             overflow: hidden;
-            background: url('https://raw.githubusercontent.com/elnawasunda/akbar-portofolio/main/music-background.png') center/cover no-repeat;
         }
         
-        .hero::before {
-            content: '';
+        .vanta-background {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1;
+            z-index: -1;
         }
         
         .hero-content {
@@ -230,7 +196,7 @@
             align-items: center;
             gap: 80px;
             position: relative;
-            z-index: 2;
+            z-index: 10;
         }
         
         .hero-image {
@@ -245,7 +211,11 @@
             height: 600px;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            transform: rotate3d(0.5, 1, 0, 15deg);
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.3),
+                0 0 0 15px var(--accent),
+                0 0 0 25px rgba(0, 168, 255, 0.1);
             transition: transform 0.5s ease;
         }
         
@@ -262,15 +232,24 @@
         
         .hero-text {
             flex: 1;
-            text-align: right;
-            padding-right: 50px;
         }
         
         .hero-text h1 {
             font-size: 4.5rem;
             margin-bottom: 20px;
-            color: var(--text);
+            background: linear-gradient(135deg, #00a8ff, #9c27b0, #ff2e63);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient-shift 8s infinite;
+            background-size: 300% 300%;
             line-height: 1.1;
+        }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
         .hero-text h2 {
@@ -284,8 +263,7 @@
             font-size: 1.3rem;
             margin-bottom: 40px;
             color: var(--text-secondary);
-            max-width: 600px;
-            margin-left: auto;
+            max-width: 700px;
         }
         
         .quote {
@@ -294,15 +272,14 @@
             color: var(--accent);
             margin-top: 40px;
             position: relative;
-            padding-right: 40px;
+            padding-left: 40px;
             font-weight: 500;
-            text-align: right;
         }
         
         .quote::before {
             content: """;
             position: absolute;
-            right: 0;
+            left: 0;
             top: -30px;
             font-size: 6rem;
             color: rgba(0, 168, 255, 0.15);
@@ -390,17 +367,6 @@
             color: var(--text);
         }
         
-        .location-link {
-            color: var(--accent);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .location-link:hover {
-            color: var(--accent2);
-            text-decoration: underline;
-        }
-        
         /* Skills Section */
         .skills-grid {
             display: grid;
@@ -444,7 +410,7 @@
         }
         
         .skill-card i {
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: var(--accent);
             margin-bottom: 25px;
         }
@@ -506,21 +472,21 @@
         }
         
         .track-info {
-            padding: 30px;
+            padding: 35px;
             position: relative;
             z-index: 2;
         }
         
         .track-info h3 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin-bottom: 15px;
             color: var(--accent);
         }
         
         .track-info p {
             color: var(--text-secondary);
-            margin-bottom: 20px;
-            font-size: 1rem;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
             min-height: 60px;
         }
         
@@ -529,12 +495,12 @@
             align-items: center;
             background: var(--accent);
             color: white;
-            padding: 10px 25px;
+            padding: 12px 30px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
             transition: var(--transition);
-            font-size: 1rem;
+            font-size: 1.1rem;
             border: 2px solid transparent;
         }
         
@@ -546,13 +512,88 @@
         }
         
         .platform-icon {
-            margin-right: 8px;
-            font-size: 1.2rem;
+            margin-right: 10px;
+            font-size: 1.4rem;
         }
         
         .youtube-icon { color: #ff0000; }
         .soundcloud-icon { color: #ff8800; }
         .spotify-icon { color: #1db954; }
+        
+        /* Testimonials Section */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 40px;
+        }
+        
+        .testimonial-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            position: relative;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-size: 8rem;
+            color: var(--accent);
+            opacity: 0.05;
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        .testimonial-card p {
+            margin-bottom: 30px;
+            line-height: 1.8;
+            font-style: italic;
+            position: relative;
+            z-index: 2;
+            font-size: 1.2rem;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .author-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent), var(--accent2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+        
+        .author-info h4 {
+            color: var(--accent);
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            color: var(--text-secondary);
+            font-style: normal;
+            margin: 0;
+        }
         
         /* Contact Section */
         .contact {
@@ -577,7 +618,7 @@
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 25px;
             margin-top: 60px;
             flex-wrap: wrap;
         }
@@ -586,12 +627,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 70px;
-            height: 70px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             background: var(--card-bg);
             color: var(--text);
-            font-size: 1.8rem;
+            font-size: 2rem;
             transition: var(--transition);
             text-decoration: none;
             backdrop-filter: blur(10px);
@@ -619,46 +660,6 @@
             transform: translateY(-10px) scale(1.1);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
             border-color: transparent;
-        }
-        
-        .theme-toggle-container {
-            margin-top: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .theme-toggle {
-            background: var(--secondary);
-            border: none;
-            width: 60px;
-            height: 30px;
-            border-radius: 30px;
-            position: relative;
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .theme-toggle::before {
-            content: '';
-            position: absolute;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            top: 3px;
-            left: 3px;
-            background: var(--accent);
-            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-        }
-        
-        .light-mode .theme-toggle::before {
-            transform: translateX(30px);
-        }
-        
-        .theme-toggle-label {
-            font-size: 1rem;
-            color: var(--text-secondary);
         }
         
         /* Footer */
@@ -719,18 +720,14 @@
             
             .hero-text {
                 padding: 0 20px;
-                text-align: center;
             }
             
             .hero-text p {
                 margin: 0 auto 30px;
-                text-align: center;
             }
             
             .quote {
                 margin: 30px auto 0;
-                text-align: center;
-                padding-right: 0;
             }
             
             .about-content {
@@ -787,6 +784,7 @@
                 grid-template-columns: 1fr;
             }
             
+            .testimonials-grid,
             .tracks-grid {
                 grid-template-columns: 1fr;
             }
@@ -820,14 +818,6 @@
             .profile-frame {
                 height: 350px;
             }
-            
-            .logo-name {
-                font-size: 1.5rem;
-            }
-            
-            .logo-subtitle {
-                font-size: 0.8rem;
-            }
         }
     </style>
 </head>
@@ -835,39 +825,31 @@
     <!-- Header -->
     <header>
         <div class="header-container">
-            <a href="#" class="logo" onclick="window.location.reload()">
+            <a href="#" class="logo">
                 <img src="https://raw.githubusercontent.com/elnawasunda/akbar-portofolio/1144b6e6bb86e29312e0a57630a97b02566228ba/logo.png" alt="Logo">
-                <div class="logo-text">
-                    <div class="logo-name">Akbar Nawasunda</div>
-                    <div class="logo-subtitle">MUSIC PRODUCER</div>
-                </div>
+                <span>AkbarNawasunda</span>
             </a>
             
             <div class="nav-menu">
-                <a href="#about">About</a>
+                <a href="#about">Tentang</a>
                 <a href="#skills">Skills</a>
-                <a href="#discography">Discography</a>
-                <a href="#contact">Contact</a>
-                <div class="language-switcher">
-                    <button class="language-btn">
-                        <i class="fas fa-globe"></i> ID
-                    </button>
-                    <div class="language-dropdown">
-                        <a href="#" data-lang="en">English</a>
-                        <a href="#" data-lang="id">Indonesia</a>
-                        <a href="#" data-lang="zh">中文</a>
-                    </div>
-                </div>
+                <a href="#discography">Diskografi</a>
+                <a href="#testimonials">Testimoni</a>
+                <a href="#contact">Kontak</a>
             </div>
             
-            <div class="menu-toggle" id="menuToggle">
-                <i class="fas fa-bars"></i>
+            <div class="header-right">
+                <button class="theme-toggle" id="themeToggle"></button>
+                <div class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
             </div>
         </div>
     </header>
     
-    <!-- Hero Section -->
+    <!-- Hero Section with Vanta.js Background -->
     <section class="hero">
+        <div class="vanta-background" id="vanta-bg"></div>
         <div class="container">
             <div class="hero-content">
                 <div class="hero-image">
@@ -877,9 +859,9 @@
                 </div>
                 
                 <div class="hero-text">
-                    <h1>Akbar<br>Nawasunda</h1>
-                    <h2>Music Producer • Composer</h2>
-                    <p>Creating soul-stirring music with the distinctive touch of Bandung. Every note is a story, every melody is living emotion.</p>
+                    <h1>Akbar Nawasunda</h1>
+                    <h2>Produser Musik • DJ • Komposer</h2>
+                    <p>Menciptakan karya musik yang menggetarkan jiwa dengan sentuhan khas Bandung. Setiap nada adalah cerita, setiap melodi adalah emosi yang hidup.</p>
                     <p class="quote">"slowly but surely"</p>
                 </div>
             </div>
@@ -889,29 +871,29 @@
     <!-- About Section -->
     <section class="section" id="about">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
+            <h2 class="section-title">Tentang Saya</h2>
             <div class="about-content">
                 <div class="about-text">
                     <h3>Idel Akbar Ramadan</h3>
-                    <p>My life is an ever-evolving song where every melody is an expression of emotions and thoughts united into beauty. As a music producer and composer, I'm dedicated to creating works that stir the soul.</p>
-                    <p>I began my journey in music as a teenager, inspired by the energy of electronic music and the richness of Indonesian musical culture. With a unique approach blending breakbeat, indobass, and jungle dutch Bandung, I strive to create distinctive and captivating musical identity.</p>
+                    <p>Hidup saya adalah sebuah lagu yang terus ditulis, di mana setiap melodi adalah ekspresi emosi dan pikiran yang disatukan menjadi keindahan. Sebagai produser musik, DJ, dan komposer, saya berdedikasi untuk menciptakan karya yang menggetarkan jiwa.</p>
+                    <p>Saya mulai terjun ke dunia musik sejak remaja, terinspirasi oleh energi musik elektronik dan kekayaan budaya musik Indonesia. Dengan pendekatan unik yang memadukan breakbeat, indobass, dan jungle dutch Bandung, saya berusaha menciptakan identitas musik yang khas dan memukau.</p>
                     
                     <div class="about-info">
                         <div class="info-card">
-                            <h4>Age</h4>
-                            <p>19 Years</p>
+                            <h4>Umur</h4>
+                            <p>19 Tahun</p>
                         </div>
                         <div class="info-card">
-                            <h4>Location</h4>
-                            <p><a href="https://maps.google.com?q=Cipeundeuy,Bandung+Barat" class="location-link" target="_blank">Cipeundeuy, Bandung Barat</a></p>
+                            <h4>Lokasi</h4>
+                            <p>Cipeundeuy, Bandung Barat, Jawa Barat</p>
                         </div>
                         <div class="info-card">
                             <h4>Genre</h4>
                             <p>Breakbeat, Indobass, Jungle Dutch Bandung</p>
                         </div>
                         <div class="info-card">
-                            <h4>Dream</h4>
-                            <p>Become a Legendary Musician</p>
+                            <h4>Mimpi</h4>
+                            <p>Menjadi Musisi Legendaris</p>
                         </div>
                     </div>
                 </div>
@@ -926,23 +908,33 @@
             <div class="skills-grid">
                 <div class="skill-card">
                     <i class="fas fa-music"></i>
-                    <h3>Music Production</h3>
-                    <p>Creating original compositions with personal touch</p>
+                    <h3>Produksi Musik</h3>
+                    <p>Menciptakan komposisi orisinal dengan sentuhan personal</p>
                 </div>
                 <div class="skill-card">
                     <i class="fas fa-sliders-h"></i>
                     <h3>Mixing & Mastering</h3>
-                    <p>Professional audio processing for optimal results</p>
+                    <p>Pengolahan suara profesional untuk hasil optimal</p>
                 </div>
                 <div class="skill-card">
                     <i class="fas fa-drum"></i>
                     <h3>Sound Design</h3>
-                    <p>Designing unique and characteristic sounds</p>
+                    <p>Mendesain suara unik dan karakteristik</p>
                 </div>
                 <div class="skill-card">
                     <i class="fab fa-fl-studio"></i>
                     <h3>FL Studio</h3>
-                    <p>Main software for music production</p>
+                    <p>Software utama untuk produksi musik</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-headphones"></i>
+                    <h3>Live Performance</h3>
+                    <p>Pengalaman tampil langsung sebagai DJ</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-wave-square"></i>
+                    <h3>Sound Engineering</h3>
+                    <p>Teknik pengaturan suara profesional</p>
                 </div>
             </div>
         </div>
@@ -951,16 +943,16 @@
     <!-- Discography Section -->
     <section class="section" id="discography">
         <div class="container">
-            <h2 class="section-title">Discography</h2>
+            <h2 class="section-title">Diskografi</h2>
             <div class="tracks-grid">
                 <!-- Track 1 -->
                 <div class="track-card">
                     <div class="track-image" style="background: linear-gradient(45deg, #ff2e63, #9c27b0);"></div>
                     <div class="track-info">
                         <h3>DJ TAK INGIN USAI BREAKBEAT</h3>
-                        <p>Energetic remix with hypnotic beats and Bandung signature</p>
+                        <p>Remix energik dengan beat yang menghipnotis dan sentuhan khas Bandung</p>
                         <a href="https://youtu.be/LaUzmxudvyI" class="play-btn" target="_blank">
-                            <i class="fab fa-youtube platform-icon youtube-icon"></i>Listen
+                            <i class="fab fa-youtube platform-icon youtube-icon"></i>Dengarkan
                         </a>
                     </div>
                 </div>
@@ -970,9 +962,9 @@
                     <div class="track-image" style="background: linear-gradient(45deg, #00a8ff, #4cd137);"></div>
                     <div class="track-info">
                         <h3>DJ HARGAI AKU BREAKBEAT</h3>
-                        <p>Emotional harmony with strong rhythm and captivating melody</p>
+                        <p>Harmoni emosional dengan ritme yang kuat dan melodi memikat</p>
                         <a href="https://youtu.be/icYP_m18FYE" class="play-btn" target="_blank">
-                            <i class="fab fa-youtube platform-icon youtube-icon"></i>Listen
+                            <i class="fab fa-youtube platform-icon youtube-icon"></i>Dengarkan
                         </a>
                     </div>
                 </div>
@@ -982,9 +974,9 @@
                     <div class="track-image" style="background: linear-gradient(45deg, #fbc531, #e84118);"></div>
                     <div class="track-info">
                         <h3>DJ DIE WITH A SMILE BREAKBEAT</h3>
-                        <p>Heart-touching melody with signature beat and modern arrangement</p>
+                        <p>Melodi yang menyentuh hati dengan beat khas dan aransemen modern</p>
                         <a href="https://youtu.be/g37Cn8ajC6M" class="play-btn" target="_blank">
-                            <i class="fab fa-youtube platform-icon youtube-icon"></i>Listen
+                            <i class="fab fa-youtube platform-icon youtube-icon"></i>Dengarkan
                         </a>
                     </div>
                 </div>
@@ -994,9 +986,9 @@
                     <div class="track-image" style="background: linear-gradient(45deg, #8c7ae6, #00a8ff);"></div>
                     <div class="track-info">
                         <h3>ROSE & Bruno Mars - APT 2024 [Remix]</h3>
-                        <p>Unique collaboration with personal touch and electronic vibe</p>
+                        <p>Kolaborasi unik dengan sentuhan personal dan nuansa elektronik</p>
                         <a href="https://on.soundcloud.com/e8DrmGThgY7Xs77rVs" class="play-btn" target="_blank">
-                            <i class="fab fa-soundcloud platform-icon soundcloud-icon"></i>Listen
+                            <i class="fab fa-soundcloud platform-icon soundcloud-icon"></i>Dengarkan
                         </a>
                     </div>
                 </div>
@@ -1006,9 +998,9 @@
                     <div class="track-image" style="background: linear-gradient(45deg, #4cd137, #0097e6);"></div>
                     <div class="track-info">
                         <h3>Bayang Tanpa Kata</h3>
-                        <p>Original song with deep lyrics and captivating melody</p>
+                        <p>Lagu orisinal dengan lirik mendalam dan melodi yang memikat hati</p>
                         <a href="https://open.spotify.com/track/5mJllAYnpnYkXWQOOWsywt?si=DFmfmZ0IQL6MG8lg6EIE4g" class="play-btn" target="_blank">
-                            <i class="fab fa-spotify platform-icon spotify-icon"></i>Listen
+                            <i class="fab fa-spotify platform-icon spotify-icon"></i>Dengarkan
                         </a>
                     </div>
                 </div>
@@ -1018,10 +1010,51 @@
                     <div class="track-image" style="background: linear-gradient(45deg, #e84118, #fbc531);"></div>
                     <div class="track-info">
                         <h3>Yang Tak Pernah Usai</h3>
-                        <p>Timeless melody with melancholic nuance</p>
+                        <p>Melodi yang abadi dalam ingatan dengan nuansa melankolis</p>
                         <a href="https://open.spotify.com/track/2MFhrB5wnRhCaICNxQ2nox?si=ooGEf_j_R7OD4DGNh_0XyQ" class="play-btn" target="_blank">
-                            <i class="fab fa-spotify platform-icon spotify-icon"></i>Listen
+                            <i class="fab fa-spotify platform-icon spotify-icon"></i>Dengarkan
                         </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="section" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">Testimoni</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p>"Akbar memiliki pendekatan unik dalam menciptakan musik. Kemampuannya menggabungkan berbagai elemen musik menghasilkan karya yang luar biasa dan penuh karakter. Setiap lagunya membawa pendengar dalam perjalanan emosional yang tak terlupakan."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JV</div>
+                        <div class="author-info">
+                            <h4>Jose Valino Algie</h4>
+                            <p>Produser Musik</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p>"Remix yang dibuat Akbar selalu memberikan sentuhan segar pada lagu-lagu populer. Dia benar-benar memahami apa yang didengar oleh pendengarnya. Dalam setiap penampilan live, dia mampu menghidupkan panggung dengan energi yang luar biasa."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MR</div>
+                        <div class="author-info">
+                            <h4>Maria Rodriguez</h4>
+                            <p>Event Organizer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p>"Saya selalu terkesan dengan bagaimana Akbar bisa menciptakan atmosfer yang kuat dalam setiap karyanya. Dia adalah talenta yang patut diperhitungkan di industri musik Indonesia. Kedalaman emosi dalam komposisinya benar-benar luar biasa."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">TS</div>
+                        <div class="author-info">
+                            <h4>Thomas Surya</h4>
+                            <p>DJ Senior</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1031,8 +1064,8 @@
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
-            <h2 class="section-title">Contact Me</h2>
-            <p>Interested in collaboration or just want to say hello? Don't hesitate to contact me!</p>
+            <h2 class="section-title">Terhubung Dengan Saya</h2>
+            <p>Tertarik berkolaborasi atau sekadar menyapa? Jangan ragu untuk menghubungi saya!</p>
             
             <div class="social-links">
                 <a href="https://wa.me/6285183067309" class="social-link" target="_blank">
@@ -1057,11 +1090,6 @@
                     <i class="fas fa-envelope"></i>
                 </a>
             </div>
-            
-            <div class="theme-toggle-container">
-                <span class="theme-toggle-label">Dark Mode</span>
-                <button class="theme-toggle" id="themeToggle"></button>
-            </div>
         </div>
     </section>
     
@@ -1070,7 +1098,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">Akbar<span>Nawasunda</span></div>
-                <p>Music Producer • Composer</p>
+                <p>Produser Musik • DJ • Komposer</p>
                 <div class="copyright">
                     <p>© 2024 Akbar Nawasunda. All Rights Reserved.</p>
                     <p>"slowly but surely"</p>
@@ -1080,6 +1108,23 @@
     </footer>
     
     <script>
+        // Vanta.js Background
+        VANTA.NET({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x00a8ff,
+            backgroundColor: 0xa0a0b,
+            points: 12.00,
+            maxDistance: 22.00,
+            spacing: 18.00
+        });
+        
         // Theme toggle
         const themeToggle = document.getElementById('themeToggle');
         themeToggle.addEventListener('click', () => {
@@ -1088,10 +1133,6 @@
             // Save preference
             const isLightMode = document.body.classList.contains('light-mode');
             localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
-            
-            // Update label
-            document.querySelector('.theme-toggle-label').textContent = 
-                isLightMode ? 'Light Mode' : 'Dark Mode';
         });
         
         // Mobile menu toggle
@@ -1115,153 +1156,31 @@
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                if (this.getAttribute('href') !== '#') {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 100,
-                            behavior: 'smooth'
-                        });
-                    }
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
                 }
             });
         });
         
-        // Theme toggle
-        const themeToggle = document.getElementById('themeToggle');
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('light-mode');
-            
-            // Save preference
-            const isLightMode = document.body.classList.contains('light-mode');
-            localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
-        });
-        
-        // Language switcher
-        const languageBtn = document.getElementById('languageBtn');
-        let currentLanguage = 'id';
-        
-        const translations = {
-            id: {
-                about: "Tentang",
-                skills: "Skills",
-                discography: "Diskografi",
-                contact: "Contact",
-                title: "Akbar Nawasunda | Produser Musik & Komposer",
-                name: "Akbar Nawasunda",
-                role: "Produser Musik • Komposer",
-                quote: "\"slowly but surely\"",
-                aboutTitle: "Tentang Saya",
-                skillsTitle: "Skills & Tools",
-                discographyTitle: "Diskografi",
-                contactTitle: "Contact Me",
-                aboutText1: "Hidup saya adalah sebuah lagu yang terus ditulis, di mana setiap melodi adalah ekspresi emosi dan pikiran yang disatukan menjadi keindahan. Sebagai produser musik dan komposer, saya berdedikasi untuk menciptakan karya yang menggetarkan jiwa.",
-                aboutText2: "Saya mulai terjun ke dunia musik sejak remaja, terinspirasi oleh energi musik elektronik dan kekayaan budaya musik Indonesia. Dengan pendekatan unik yang memadukan breakbeat, indobass, dan jungle dutch Bandung, saya berusaha menciptakan identitas musik yang khas dan memukau.",
-                age: "Umur",
-                location: "Lokasi",
-                genre: "Genre",
-                dream: "Mimpi",
-                contactText: "Tertarik berkolaborasi atau sekadar menyapa? Jangan ragu untuk menghubungi saya!",
-                copyright: "© 2024 Akbar Nawasunda. All Rights Reserved."
-            },
-            en: {
-                about: "About",
-                skills: "Skills",
-                discography: "Discography",
-                contact: "Contact",
-                title: "Akbar Nawasunda | Music Producer & Composer",
-                name: "Akbar Nawasunda",
-                role: "Music Producer • Composer",
-                quote: "\"slowly but surely\"",
-                aboutTitle: "About Me",
-                skillsTitle: "Skills & Tools",
-                discographyTitle: "Discography",
-                contactTitle: "Contact Me",
-                aboutText1: "My life is an ongoing song where every melody is the union of emotion and thought transformed into beauty. As a music producer and composer, I'm dedicated to creating works that stir the soul.",
-                aboutText2: "I began my journey in music as a teenager, inspired by the energy of electronic music and the richness of Indonesian musical culture. With a unique approach blending breakbeat, indobass, and Bandung's jungle dutch, I strive to create a distinctive and captivating musical identity.",
-                age: "Age",
-                location: "Location",
-                genre: "Genre",
-                dream: "Dream",
-                contactText: "Interested in collaboration or just want to say hello? Feel free to reach out!",
-                copyright: "© 2024 Akbar Nawasunda. All Rights Reserved."
-            },
-            zh: {
-                about: "关于",
-                skills: "技能",
-                discography: "作品",
-                contact: "联系",
-                title: "Akbar Nawasunda | 音乐制作人 & 作曲家",
-                name: "Akbar Nawasunda",
-                role: "音乐制作人 • 作曲家",
-                quote: "\"慢慢来，但一定成功\"",
-                aboutTitle: "关于我",
-                skillsTitle: "技能与工具",
-                discographyTitle: "作品集",
-                contactTitle: "联系我",
-                aboutText1: "我的生活是一首不断创作的歌曲，每一个旋律都是情感和思想融合成美的表达。作为一名音乐制作人和作曲家，我致力于创作触动灵魂的作品。",
-                aboutText2: "我从青少年时期开始音乐之旅，受到电子音乐的能量和印尼音乐文化丰富性的启发。通过融合breakbeat、indobass和万隆jungle dutch的独特方法，我努力创造独特而迷人的音乐特色。",
-                age: "年龄",
-                location: "位置",
-                genre: "流派",
-                dream: "梦想",
-                contactText: "有兴趣合作或只是想打个招呼？随时联系我！",
-                copyright: "© 2024 Akbar Nawasunda。保留所有权利。"
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.1)';
+                header.style.padding = '15px 0';
+            } else {
+                header.style.boxShadow = 'none';
+                header.style.padding = '25px 0';
             }
-        };
-        
-        languageBtn.addEventListener('click', () => {
-            currentLanguage = currentLanguage === 'id' ? 'en' : currentLanguage === 'en' ? 'zh' : 'id';
-            updateLanguage(currentLanguage);
         });
-        
-        function updateLanguage(lang) {
-            const t = translations[lang];
-            
-            // Update navigation
-            document.querySelectorAll('.nav-menu a')[0].textContent = t.about;
-            document.querySelectorAll('.nav-menu a')[1].textContent = t.skills;
-            document.querySelectorAll('.nav-menu a')[2].textContent = t.discography;
-            document.querySelectorAll('.nav-menu a')[3].textContent = t.contact;
-            
-            // Update hero section
-            document.querySelector('.hero-text h2').textContent = t.role;
-            document.querySelector('.quote').textContent = t.quote;
-            
-            // Update section titles
-            document.querySelector('#about .section-title').textContent = t.aboutTitle;
-            document.querySelector('#skills .section-title').textContent = t.skillsTitle;
-            document.querySelector('#discography .section-title').textContent = t.discographyTitle;
-            document.querySelector('#contact .section-title').textContent = t.contactTitle;
-            
-            // Update about section
-            const aboutParagraphs = document.querySelectorAll('.about-text p');
-            aboutParagraphs[0].textContent = t.aboutText1;
-            aboutParagraphs[1].textContent = t.aboutText2;
-            
-            // Update info cards
-            const infoCards = document.querySelectorAll('.info-card h4');
-            infoCards[0].textContent = t.age;
-            infoCards[1].textContent = t.location;
-            infoCards[2].textContent = t.genre;
-            infoCards[3].textContent = t.dream;
-            
-            // Update contact section
-            document.querySelector('#contact p').textContent = t.contactText;
-            
-            // Update copyright
-            document.querySelector('.copyright p').textContent = t.copyright;
-            
-            // Update button text
-            languageBtn.querySelector('span').textContent = lang.toUpperCase();
-            
-            // Update page title
-            document.title = t.title;
-        }
         
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
@@ -1271,19 +1190,7 @@
                 document.body.classList.add('light-mode');
             }
             
-            // Header scroll effect
-            window.addEventListener('scroll', () => {
-                const header = document.querySelector('header');
-                if (window.scrollY > 100) {
-                    header.style.boxShadow = '0 5px 30px rgba(0, 0, 0, 0.1)';
-                    header.style.padding = '15px 0';
-                } else {
-                    header.style.boxShadow = 'none';
-                    header.style.padding = '25px 0';
-                }
-            });
-            
-            // Trigger scroll event to set initial header style
+            // Add scroll event listener
             window.dispatchEvent(new Event('scroll'));
         });
     </script>
