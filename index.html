@@ -56,6 +56,17 @@
             padding: 0 40px;
         }
         
+        /* Canvas Background */
+        #music-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at top right, #0d1424, #070b16);
+        }
+        
         /* Header & Navigation */
         header {
             padding: 25px 0;
@@ -220,21 +231,6 @@
             padding: 150px 0 100px;
             position: relative;
             overflow: hidden;
-            background: radial-gradient(circle at top right, #1c2333, #0d1424);
-        }
-        
-        .music-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.1;
-            background: 
-                linear-gradient(45deg, transparent 49%, var(--accent) 50%, transparent 51%),
-                linear-gradient(-45deg, transparent 49%, var(--accent) 50%, transparent 51%);
-            background-size: 50px 50px;
         }
         
         .hero-content {
@@ -800,6 +796,9 @@
     </style>
 </head>
 <body>
+    <!-- Canvas Background -->
+    <canvas id="music-background"></canvas>
+    
     <!-- Header -->
     <header>
         <div class="header-container">
@@ -838,7 +837,6 @@
     
     <!-- Hero Section -->
     <section class="hero">
-        <div class="music-background"></div>
         <div class="container">
             <div class="hero-content">
                 <div class="hero-image">
@@ -1062,6 +1060,158 @@
     </footer>
     
     <script>
+        // Canvas Background Animation
+        const canvas = document.getElementById('music-background');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        // Particle class
+        class Particle {
+            constructor(x, y, type) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 5 + 2;
+                this.speedX = Math.random() * 3 - 1.5;
+                this.speedY = Math.random() * 3 - 1.5;
+                this.type = type; // 'star', 'note', or 'wave'
+                this.color = this.getColor();
+                this.angle = 0;
+                this.curve = Math.random() * 0.2;
+            }
+            
+            getColor() {
+                const colors = ['#3a86ff', '#ff5e8d', '#8338ec', '#ffbe0b', '#38b000'];
+                return colors[Math.floor(Math.random() * colors.length)];
+            }
+            
+            update() {
+                this.angle += this.curve;
+                this.x += Math.sin(this.angle) * 0.5;
+                
+                this.x += this.speedX;
+                this.y += this.speedY;
+                
+                if (this.x > canvas.width || this.x < 0) {
+                    this.speedX = -this.speedX;
+                }
+                
+                if (this.y > canvas.height || this.y < 0) {
+                    this.speedY = -this.speedY;
+                }
+            }
+            
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                
+                if (this.type === 'star') {
+                    // Draw star
+                    for (let i = 0; i < 5; i++) {
+                        ctx.lineTo(
+                            this.x + this.size * Math.cos((18 + i * 72) * Math.PI / 180),
+                            this.y + this.size * Math.sin((18 + i * 72) * Math.PI / 180)
+                        );
+                        ctx.lineTo(
+                            this.x + this.size/2 * Math.cos((54 + i * 72) * Math.PI / 180),
+                            this.y + this.size/2 * Math.sin((54 + i * 72) * Math.PI / 180)
+                        );
+                    }
+                    ctx.closePath();
+                    ctx.fill();
+                } else if (this.type === 'note') {
+                    // Draw music note
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size/2, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(this.x + this.size/2, this.y);
+                    ctx.lineTo(this.x + this.size/2, this.y - this.size * 2);
+                    ctx.strokeStyle = this.color;
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                    
+                    ctx.beginPath();
+                    ctx.arc(this.x + this.size/2, this.y - this.size * 2, this.size/3, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    // Draw sound wave
+                    ctx.beginPath();
+                    ctx.moveTo(this.x - this.size, this.y);
+                    for (let i = 0; i < 5; i++) {
+                        ctx.quadraticCurveTo(
+                            this.x - this.size/2 + i * (this.size/2), 
+                            this.y - this.size * Math.sin(i),
+                            this.x + i * (this.size/2), 
+                            this.y
+                        );
+                    }
+                    ctx.strokeStyle = this.color;
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
+                }
+            }
+        }
+        
+        // Create particles
+        const particles = [];
+        const particleCount = 100;
+        
+        for (let i = 0; i < particleCount; i++) {
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height;
+            const types = ['star', 'note', 'wave'];
+            const type = types[Math.floor(Math.random() * types.length)];
+            particles.push(new Particle(x, y, type));
+        }
+        
+        // Mouse interaction
+        const mouse = {
+            x: undefined,
+            y: undefined,
+            radius: 100
+        }
+        
+        window.addEventListener('mousemove', function(event) {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+        
+        // Animation loop
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                // Mouse interaction
+                const dx = particles[i].x - mouse.x;
+                const dy = particles[i].y - mouse.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < mouse.radius) {
+                    const force = (mouse.radius - distance) / mouse.radius;
+                    const angle = Math.atan2(dy, dx);
+                    const moveX = Math.cos(angle) * force * 5;
+                    const moveY = Math.sin(angle) * force * 5;
+                    
+                    particles[i].x += moveX;
+                    particles[i].y += moveY;
+                }
+            }
+            
+            requestAnimationFrame(animate);
+        }
+        
+        // Resize canvas when window resizes
+        window.addEventListener('resize', function() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        
         // Theme toggle
         const themeToggle = document.getElementById('themeToggle');
         themeToggle.addEventListener('click', () => {
@@ -1109,6 +1259,9 @@
         
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
+            // Start animation
+            animate();
+            
             // Load saved theme
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'light') {
