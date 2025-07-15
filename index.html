@@ -6,6 +6,7 @@
     <title>Akbar Nawasunda | Produser Musik & Komposer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <style>
         :root {
             --primary: #121826;
@@ -78,6 +79,11 @@
             backdrop-filter: blur(10px);
             transition: var(--transition);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .scrolled {
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
         }
         
         .header-container {
@@ -426,6 +432,87 @@
             text-decoration: underline;
         }
         
+        /* Timeline */
+        .timeline-container {
+            margin-top: 60px;
+            position: relative;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--accent);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: var(--card-bg);
+            position: relative;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .timeline-content h4 {
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+        
+        .timeline-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: var(--accent);
+            border: 4px solid var(--secondary);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+        
         /* Skills Section */
         .skills-grid {
             display: grid;
@@ -466,6 +553,38 @@
         }
         
         /* Discography Section */
+        .discography-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .tab-btn {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--text);
+            padding: 10px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .tabs-content {
+            display: none;
+        }
+        
+        .tabs-content.active {
+            display: block;
+        }
+        
         .tracks-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -479,6 +598,7 @@
             transition: var(--transition);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
         }
         
         .track-card:hover {
@@ -539,6 +659,282 @@
         .soundcloud-icon { color: #ff8800; }
         .spotify-icon { color: #1db954; }
         
+        .track-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Blog Section */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .blog-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+        }
+        
+        .blog-image {
+            height: 200px;
+            background: linear-gradient(45deg, #ff5e8d, #8338ec);
+        }
+        
+        .blog-content {
+            padding: 25px;
+        }
+        
+        .blog-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+        
+        .blog-content p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+        
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+        
+        .read-more {
+            display: inline-block;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .read-more:hover {
+            text-decoration: underline;
+        }
+        
+        /* Testimonials */
+        .testimonials-container {
+            max-width: 800px;
+            margin: 70px auto 0;
+            position: relative;
+        }
+        
+        .testimonial-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin: 0 20px;
+        }
+        
+        .testimonial-text {
+            font-size: 1.1rem;
+            color: var(--text);
+            font-style: italic;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .testimonial-text::before,
+        .testimonial-text::after {
+            content: '"';
+            font-size: 3rem;
+            color: var(--accent);
+            opacity: 0.3;
+            position: absolute;
+        }
+        
+        .testimonial-text::before {
+            top: -20px;
+            left: -20px;
+        }
+        
+        .testimonial-text::after {
+            bottom: -40px;
+            right: -20px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .author-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--accent);
+        }
+        
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Music Player */
+        .music-player {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(18, 24, 38, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            transform: translateY(100%);
+            transition: transform 0.5s ease;
+        }
+        
+        .music-player.active {
+            transform: translateY(0);
+        }
+        
+        .player-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .track-cover {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: linear-gradient(45deg, #3a86ff, #8338ec);
+        }
+        
+        .track-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .track-details {
+            flex: 1;
+        }
+        
+        .track-details h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .track-details p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .player-btn {
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .player-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .play-btn-large {
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .progress-container {
+            flex: 2;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .progress-bar {
+            flex: 1;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .progress {
+            position: absolute;
+            height: 100%;
+            background: var(--accent);
+            border-radius: 3px;
+            width: 0%;
+        }
+        
+        .time {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            min-width: 40px;
+        }
+        
+        .close-player {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .close-player:hover {
+            color: var(--accent);
+        }
+        
         /* Contact Section */
         .contact {
             padding: 120px 0 80px;
@@ -557,6 +953,109 @@
             background: url('https://raw.githubusercontent.com/elnawasunda/akbar-portofolio/main/logo.png') center/20% repeat;
             opacity: 0.03;
             z-index: -1;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            max-width: 1200px;
+            margin: 50px auto 0;
+            text-align: left;
+        }
+        
+        .contact-form {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: var(--text);
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(58, 134, 255, 0.3);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .info-card-large {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+        
+        .info-card-large:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .info-card-large h4 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+        
+        .info-card-large p {
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+        
+        .map-container {
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            background: linear-gradient(45deg, #3a86ff, #8338ec);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
         }
         
         .social-links {
@@ -674,6 +1173,10 @@
             .profile-frame {
                 height: 480px;
             }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
         }
         
         @media (max-width: 992px) {
@@ -708,6 +1211,24 @@
             .section-title {
                 font-size: 2.6rem;
             }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item::after {
+                left: 21px;
+            }
         }
         
         @media (max-width: 768px) {
@@ -737,6 +1258,7 @@
             .menu-toggle {
                 display: block;
                 font-size: 1.8rem;
+                cursor: pointer;
             }
             
             .hero-text h1 {
@@ -770,6 +1292,17 @@
             .language-selector {
                 display: none;
             }
+            
+            .player-container {
+                flex-wrap: wrap;
+                padding: 15px;
+            }
+            
+            .progress-container {
+                order: 3;
+                flex: 100%;
+                margin-top: 15px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -792,6 +1325,10 @@
             .profile-frame {
                 height: 320px;
             }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -799,8 +1336,46 @@
     <!-- Canvas Background -->
     <canvas id="music-background"></canvas>
     
+    <!-- Music Player -->
+    <div class="music-player" id="musicPlayer">
+        <div class="player-container">
+            <div class="track-cover" id="playerCover">
+                <img src="https://raw.githubusercontent.com/elnawasunda/akbar-portofolio/1144b6e6bb86e29312e0a57630a97b02566228ba/logo.png" alt="Track Cover">
+            </div>
+            
+            <div class="track-details">
+                <h4 id="playerTitle">DJ TAK INGIN USAI BREAKBEAT</h4>
+                <p id="playerArtist">Akbar Nawasunda</p>
+            </div>
+            
+            <div class="player-controls">
+                <button class="player-btn" id="prevBtn">
+                    <i class="fas fa-step-backward"></i>
+                </button>
+                <button class="player-btn play-btn-large" id="playBtn">
+                    <i class="fas fa-play"></i>
+                </button>
+                <button class="player-btn" id="nextBtn">
+                    <i class="fas fa-step-forward"></i>
+                </button>
+            </div>
+            
+            <div class="progress-container">
+                <span class="time" id="currentTime">0:00</span>
+                <div class="progress-bar" id="progressBar">
+                    <div class="progress" id="progress"></div>
+                </div>
+                <span class="time" id="duration">0:00</span>
+            </div>
+            
+            <button class="close-player" id="closePlayer">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+    
     <!-- Header -->
-    <header>
+    <header id="mainHeader">
         <div class="header-container">
             <a href="#" class="logo" onclick="location.reload(); return false;">
                 <img src="https://raw.githubusercontent.com/elnawasunda/akbar-portofolio/1144b6e6bb86e29312e0a57630a97b02566228ba/logo.png" alt="Logo">
@@ -810,10 +1385,12 @@
                 </div>
             </a>
             
-            <div class="nav-menu">
+            <div class="nav-menu" id="navMenu">
                 <a href="#about">Tentang</a>
                 <a href="#skills">Skills</a>
                 <a href="#discography">Diskografi</a>
+                <a href="#blog">Blog</a>
+                <a href="#testimonials">Testimoni</a>
                 <a href="#contact">Contact Me</a>
             </div>
             
@@ -888,6 +1465,42 @@
                             <p>Menjadi Musisi Legendaris</p>
                         </div>
                     </div>
+                    
+                    <div class="timeline-container">
+                        <h3>Perjalanan Karir</h3>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <h4>2020 - Awal Perjalanan</h4>
+                                    <p>Mulai mempelajari produksi musik secara otodidak menggunakan FL Studio. Membuat remix pertama untuk lagu-lagu populer.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <h4>2021 - Debut Resmi</h4>
+                                    <p>Merilis lagu pertama "Bayang Tanpa Kata" di Spotify dan platform musik digital lainnya. Mulai dikenal di komunitas musik Bandung.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <h4>2022 - Kolaborasi Pertama</h4>
+                                    <p>Berkolaborasi dengan penyanyi lokal untuk proyek musik indie. Memulai seri remix breakbeat yang menjadi ciri khas.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <h4>2023 - Pengakuan Industri</h4>
+                                    <p>Diajak kolaborasi oleh beberapa artis indie terkenal. Lagu "Yang Tak Pernah Usai" masuk dalam playlist editorial Spotify.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-content">
+                                    <h4>2024 - Ekspansi Gaya</h4>
+                                    <p>Mengembangkan gaya jungle dutch Bandung yang unik. Memulai proyek album pertama yang akan dirilis akhir tahun ini.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -901,27 +1514,32 @@
                 <div class="skill-card">
                     <i class="fas fa-music"></i>
                     <h3>Produksi Musik</h3>
-                    <p>Menciptakan komposisi orisinal dengan sentuhan personal</p>
+                    <p>Menciptakan komposisi orisinal dengan sentuhan personal. Menguasai berbagai genre mulai dari breakbeat hingga jungle dutch.</p>
                 </div>
                 <div class="skill-card">
                     <i class="fas fa-sliders-h"></i>
                     <h3>Mixing & Mastering</h3>
-                    <p>Pengolahan suara profesional untuk hasil optimal</p>
+                    <p>Pengolahan suara profesional untuk hasil optimal. Menggunakan teknik terbaru untuk menciptakan sound yang jernih dan bertenaga.</p>
                 </div>
                 <div class="skill-card">
                     <i class="fas fa-drum"></i>
                     <h3>Sound Design</h3>
-                    <p>Mendesain suara unik dan karakteristik</p>
+                    <p>Mendesain suara unik dan karakteristik. Menciptakan identitas sonik yang khas untuk setiap proyek.</p>
                 </div>
                 <div class="skill-card">
                     <i class="fab fa-fl-studio"></i>
                     <h3>FL Studio</h3>
-                    <p>Software utama untuk produksi musik</p>
+                    <p>Software utama untuk produksi musik. Menguasai FL Studio tingkat lanjut untuk workflow yang efisien.</p>
                 </div>
                 <div class="skill-card">
                     <i class="fas fa-wave-square"></i>
                     <h3>Sound Engineering</h3>
-                    <p>Teknik pengaturan suara profesional</p>
+                    <p>Teknik pengaturan suara profesional. Pengalaman dalam studio rekaman dan live performance.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-headphones"></i>
+                    <h3>Arrangement</h3>
+                    <p>Menyusun struktur lagu yang menarik. Menciptakan progresi emosi melalui penataan bagian-bagian musik.</p>
                 </div>
             </div>
         </div>
@@ -931,77 +1549,247 @@
     <section class="section" id="discography">
         <div class="container">
             <h2 class="section-title">Diskografi</h2>
-            <div class="tracks-grid">
-                <!-- Track 1 -->
-                <div class="track-card">
-                    <div class="track-image" style="background: linear-gradient(45deg, #ff5e8d, #8338ec);"></div>
-                    <div class="track-info">
-                        <h3>DJ TAK INGIN USAI BREAKBEAT</h3>
-                        <p>Remix energik dengan beat yang menghipnotis dan sentuhan khas Bandung</p>
-                        <a href="https://youtu.be/LaUzmxudvyI" class="play-btn" target="_blank">
-                            <i class="fab fa-youtube platform-icon youtube-icon"></i>Dengarkan
-                        </a>
+            
+            <div class="discography-tabs">
+                <button class="tab-btn active" data-tab="all">Semua</button>
+                <button class="tab-btn" data-tab="breakbeat">Breakbeat</button>
+                <button class="tab-btn" data-tab="original">Original</button>
+                <button class="tab-btn" data-tab="remix">Remix</button>
+            </div>
+            
+            <div class="tabs-content active" id="all-tracks">
+                <div class="tracks-grid">
+                    <!-- Track 1 -->
+                    <div class="track-card" data-category="breakbeat">
+                        <div class="track-image" style="background: linear-gradient(45deg, #ff5e8d, #8338ec);"></div>
+                        <div class="track-info">
+                            <h3>DJ TAK INGIN USAI BREAKBEAT</h3>
+                            <p>Remix energik dengan beat yang menghipnotis dan sentuhan khas Bandung</p>
+                            <div class="track-meta">
+                                <span>Breakbeat • 2024</span>
+                                <span>3:45</span>
+                            </div>
+                            <a href="#" class="play-btn play-track" data-track="tak-ingin-usai" data-title="DJ TAK INGIN USAI BREAKBEAT">
+                                <i class="fas fa-play"></i> Putar Preview
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Track 2 -->
+                    <div class="track-card" data-category="breakbeat">
+                        <div class="track-image" style="background: linear-gradient(45deg, #3a86ff, #38b000);"></div>
+                        <div class="track-info">
+                            <h3>DJ HARGAI AKU BREAKBEAT</h3>
+                            <p>Harmoni emosional dengan ritme yang kuat dan melodi memikat</p>
+                            <div class="track-meta">
+                                <span>Breakbeat • 2023</span>
+                                <span>4:12</span>
+                            </div>
+                            <a href="#" class="play-btn play-track" data-track="hargai-aku" data-title="DJ HARGAI AKU BREAKBEAT">
+                                <i class="fas fa-play"></i> Putar Preview
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Track 3 -->
+                    <div class="track-card" data-category="breakbeat">
+                        <div class="track-image" style="background: linear-gradient(45deg, #ffbe0b, #fb5607);"></div>
+                        <div class="track-info">
+                            <h3>DJ DIE WITH A SMILE BREAKBEAT</h3>
+                            <p>Melodi yang menyentuh hati dengan beat khas dan aransemen modern</p>
+                            <div class="track-meta">
+                                <span>Breakbeat • 2024</span>
+                                <span>3:58</span>
+                            </div>
+                            <a href="#" class="play-btn play-track" data-track="die-with-smile" data-title="DJ DIE WITH A SMILE BREAKBEAT">
+                                <i class="fas fa-play"></i> Putar Preview
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Track 4 -->
+                    <div class="track-card" data-category="remix">
+                        <div class="track-image" style="background: linear-gradient(45deg, #8a5cf6, #3a86ff);"></div>
+                        <div class="track-info">
+                            <h3>ROSE & Bruno Mars - APT 2024 [Remix]</h3>
+                            <p>Kolaborasi unik dengan sentuhan personal dan nuansa elektronik</p>
+                            <div class="track-meta">
+                                <span>Remix • 2024</span>
+                                <span>4:30</span>
+                            </div>
+                            <a href="#" class="play-btn play-track" data-track="apt-remix" data-title="ROSE & Bruno Mars - APT 2024 [Remix]">
+                                <i class="fas fa-play"></i> Putar Preview
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Track 5 -->
+                    <div class="track-card" data-category="original">
+                        <div class="track-image" style="background: linear-gradient(45deg, #38b000, #0077b6);"></div>
+                        <div class="track-info">
+                            <h3>Bayang Tanpa Kata</h3>
+                            <p>Lagu orisinal dengan lirik mendalam dan melodi yang memikat hati</p>
+                            <div class="track-meta">
+                                <span>Original • 2021</span>
+                                <span>4:05</span>
+                            </div>
+                            <a href="#" class="play-btn play-track" data-track="bayang-tanpa-kata" data-title="Bayang Tanpa Kata">
+                                <i class="fas fa-play"></i> Putar Preview
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Track 6 -->
+                    <div class="track-card" data-category="original">
+                        <div class="track-image" style="background: linear-gradient(45deg, #fb5607, #ffbe0b);"></div>
+                        <div class="track-info">
+                            <h3>Yang Tak Pernah Usai</h3>
+                            <p>Melodi yang abadi dalam ingatan dengan nuansa melankolis</p>
+                            <div class="track-meta">
+                                <span>Original • 2023</span>
+                                <span>3:52</span>
+                            </div>
+                            <a href="#" class="play-btn play-track" data-track="tak-pernah-usai" data-title="Yang Tak Pernah Usai">
+                                <i class="fas fa-play"></i> Putar Preview
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Track 7 -->
+                    <div class="track-card" data-category="breakbeat">
+                        <div class="track-image" style="background: linear-gradient(45deg, #8338ec, #ff006e);"></div>
+                        <div class="track-info">
+                            <h3>DJ PERCAYA BREAKBEAT</h3>
+                            <p>Beat energik dengan sentuhan melodius yang memikat pendengar</p>
+                            <div class="track-meta">
+                                <span>Breakbeat • 2023</span>
+                                <span>4:15</span>
+                            </div>
+                            <a href="#" class="play-btn play-track" data-track="percaya" data-title="DJ PERCAYA BREAKBEAT">
+                                <i class="fas fa-play"></i> Putar Preview
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Track 8 -->
+                    <div class="track-card" data-category="original">
+                        <div class="track-image" style="background: linear-gradient(45deg, #3a86ff, #ff006e);"></div>
+                        <div class="track-info">
+                            <h3>Di Ujung Waktu</h3>
+                            <p>Lagu orisinal dengan aransemen minimalis dan vokal yang emosional</p>
+                            <div class="track-meta">
+                                <span>Original • 2022</span>
+                                <span>4:22</span>
+                            </div>
+                            <a href="#" class="play-btn play-track" data-track="ujung-waktu" data-title="Di Ujung Waktu">
+                                <i class="fas fa-play"></i> Putar Preview
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Blog Section -->
+    <section class="section" id="blog">
+        <div class="container">
+            <h2 class="section-title">Blog & Proses Kreatif</h2>
+            
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-image" style="background: linear-gradient(45deg, #3a86ff, #8338ec);"></div>
+                    <div class="blog-content">
+                        <h3>Menciptakan Identitas Sonik</h3>
+                        <p>Bagaimana saya mengembangkan ciri khas sound design dalam produksi musik breakbeat dan jungle dutch Bandung.</p>
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 15 Juni 2024</span>
+                            <a href="#" class="read-more">Baca Selengkapnya</a>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Track 2 -->
-                <div class="track-card">
-                    <div class="track-image" style="background: linear-gradient(45deg, #3a86ff, #38b000);"></div>
-                    <div class="track-info">
-                        <h3>DJ HARGAI AKU BREAKBEAT</h3>
-                        <p>Harmoni emosional dengan ritme yang kuat dan melodi memikat</p>
-                        <a href="https://youtu.be/icYP_m18FYE" class="play-btn" target="_blank">
-                            <i class="fab fa-youtube platform-icon youtube-icon"></i>Dengarkan
-                        </a>
+                <div class="blog-card">
+                    <div class="blog-image" style="background: linear-gradient(45deg, #ff5e8d, #8338ec);"></div>
+                    <div class="blog-content">
+                        <h3>Proses Produksi "Die With A Smile"</h3>
+                        <p>Dibalik layar pembuatan remix breakbeat untuk lagu terbaru Bruno Mars.</p>
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 2 Mei 2024</span>
+                            <a href="#" class="read-more">Baca Selengkapnya</a>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Track 3 -->
-                <div class="track-card">
-                    <div class="track-image" style="background: linear-gradient(45deg, #ffbe0b, #fb5607);"></div>
-                    <div class="track-info">
-                        <h3>DJ DIE WITH A SMILE BREAKBEAT</h3>
-                        <p>Melodi yang menyentuh hati dengan beat khas dan aransemen modern</p>
-                        <a href="https://youtu.be/g37Cn8ajC6M" class="play-btn" target="_blank">
-                            <i class="fab fa-youtube platform-icon youtube-icon"></i>Dengarkan
-                        </a>
+                <div class="blog-card">
+                    <div class="blog-image" style="background: linear-gradient(45deg, #ffbe0b, #fb5607);"></div>
+                    <div class="blog-content">
+                        <h3>Eksperimen dengan Bunyi Tradisional</h3>
+                        <p>Menggabungkan elemen musik tradisional Sunda dengan genre elektronik modern.</p>
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 20 April 2024</span>
+                            <a href="#" class="read-more">Baca Selengkapnya</a>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- Track 4 -->
-                <div class="track-card">
-                    <div class="track-image" style="background: linear-gradient(45deg, #8a5cf6, #3a86ff);"></div>
-                    <div class="track-info">
-                        <h3>ROSE & Bruno Mars - APT 2024 [Remix]</h3>
-                        <p>Kolaborasi unik dengan sentuhan personal dan nuansa elektronik</p>
-                        <a href="https://on.soundcloud.com/e8DrmGThgY7Xs77rVs" class="play-btn" target="_blank">
-                            <i class="fab fa-soundcloud platform-icon soundcloud-icon"></i>Dengarkan
-                        </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="section" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">Testimoni</h2>
+            
+            <div class="testimonials-container">
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <p class="testimonial-text">Akbar memiliki pendekatan unik dalam produksi musik. Kemampuannya menciptakan atmosfer melalui sound design benar-benar luar biasa.</p>
+                                <div class="testimonial-author">
+                                    <div class="author-image">
+                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Reviewer">
+                                    </div>
+                                    <div class="author-info">
+                                        <h4>Rizky Maulana</h4>
+                                        <p>Produser Musik</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <p class="testimonial-text">Kolaborasi dengan Akbar memberikan sentuhan segar pada musik saya. Dia benar-benar memahami emosi yang ingin disampaikan dalam sebuah lagu.</p>
+                                <div class="testimonial-author">
+                                    <div class="author-image">
+                                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Reviewer">
+                                    </div>
+                                    <div class="author-info">
+                                        <h4>Siti Rahayu</h4>
+                                        <p>Penyanyi</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <p class="testimonial-text">Remix breakbeat Akbar selalu menjadi favorit di klub kami. Energi dan ritmenya sempurna untuk membuat orang berdansa.</p>
+                                <div class="testimonial-author">
+                                    <div class="author-image">
+                                        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Reviewer">
+                                    </div>
+                                    <div class="author-info">
+                                        <h4>Budi Santoso</h4>
+                                        <p>DJ & Club Owner</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                
-                <!-- Track 5 -->
-                <div class="track-card">
-                    <div class="track-image" style="background: linear-gradient(45deg, #38b000, #0077b6);"></div>
-                    <div class="track-info">
-                        <h3>Bayang Tanpa Kata</h3>
-                        <p>Lagu orisinal dengan lirik mendalam dan melodi yang memikat hati</p>
-                        <a href="https://open.spotify.com/track/5mJllAYnpnYkXWQOOWsywt?si=DFmfmZ0IQL6MG8lg6EIE4g" class="play-btn" target="_blank">
-                            <i class="fab fa-spotify platform-icon spotify-icon"></i>Dengarkan
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Track 6 -->
-                <div class="track-card">
-                    <div class="track-image" style="background: linear-gradient(45deg, #fb5607, #ffbe0b);"></div>
-                    <div class="track-info">
-                        <h3>Yang Tak Pernah Usai</h3>
-                        <p>Melodi yang abadi dalam ingatan dengan nuansa melankolis</p>
-                        <a href="https://open.spotify.com/track/2MFhrB5wnRhCaICNxQ2nox?si=ooGEf_j_R7OD4DGNh_0XyQ" class="play-btn" target="_blank">
-                            <i class="fab fa-spotify platform-icon spotify-icon"></i>Dengarkan
-                        </a>
-                    </div>
+                    <div class="swiper-pagination"></div>
                 </div>
             </div>
         </div>
@@ -1012,6 +1800,51 @@
         <div class="container">
             <h2 class="section-title">Contact Me</h2>
             <p>Tertarik berkolaborasi atau sekadar menyapa? Jangan ragu untuk menghubungi saya!</p>
+            
+            <div class="contact-container">
+                <div class="contact-form">
+                    <h3>Kirim Pesan</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nama Lengkap</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subjek</label>
+                            <input type="text" id="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Pesan</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Kirim Pesan</button>
+                    </form>
+                </div>
+                
+                <div class="contact-info">
+                    <div class="info-card-large">
+                        <h4>Informasi Kontak</h4>
+                        <p><i class="fas fa-envelope"></i> akbarnawasunda@gmail.com</p>
+                        <p><i class="fas fa-phone"></i> +62 851 8306 7309</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Cipeundeuy, Bandung Barat, Indonesia</p>
+                    </div>
+                    
+                    <div class="info-card-large">
+                        <h4>Jam Kerja Studio</h4>
+                        <p><i class="far fa-clock"></i> Senin-Jumat: 10:00 - 18:00</p>
+                        <p><i class="far fa-clock"></i> Sabtu: 12:00 - 16:00</p>
+                        <p><i class="fas fa-calendar-times"></i> Minggu: Libur</p>
+                    </div>
+                    
+                    <div class="map-container">
+                        <i class="fas fa-map-marked-alt"></i> Lokasi Studio di Bandung Barat
+                    </div>
+                </div>
+            </div>
             
             <div class="social-links">
                 <a href="https://wa.me/6285183067309" class="social-link" target="_blank">
@@ -1032,8 +1865,8 @@
                 <a href="https://music.apple.com/id/artist/akbar-nawasunda/1816312738" class="social-link" target="_blank">
                     <i class="fab fa-apple"></i>
                 </a>
-                <a href="mailto:akbarnawasunda@gmail.com" class="social-link">
-                    <i class="fas fa-envelope"></i>
+                <a href="https://soundcloud.com/akbarnawasunda" class="social-link" target="_blank">
+                    <i class="fab fa-soundcloud"></i>
                 </a>
             </div>
         </div>
@@ -1059,6 +1892,7 @@
         </div>
     </footer>
     
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         // Canvas Background Animation
         const canvas = document.getElementById('music-background');
@@ -1257,6 +2091,308 @@
             });
         });
         
+        // Header scroll effect
+        const header = document.getElementById('mainHeader');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Discography tabs
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                tabBtns.forEach(b => b.classList.remove('active'));
+                
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                // Get tab id
+                const tabId = btn.getAttribute('data-tab');
+                
+                // Hide all tab content
+                document.querySelectorAll('.tabs-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Show selected tab content
+                if (tabId === 'all') {
+                    document.getElementById('all-tracks').classList.add('active');
+                } else {
+                    // Filter tracks
+                    document.getElementById('all-tracks').classList.add('active');
+                    document.querySelectorAll('.track-card').forEach(card => {
+                        if (card.getAttribute('data-category') === tabId) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Initialize Swiper for testimonials
+        const swiper = new Swiper('.mySwiper', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+        });
+        
+        // Music player functionality
+        const musicPlayer = document.getElementById('musicPlayer');
+        const playBtn = document.getElementById('playBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const closePlayer = document.getElementById('closePlayer');
+        const progressBar = document.getElementById('progressBar');
+        const progress = document.getElementById('progress');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationEl = document.getElementById('duration');
+        const playerTitle = document.getElementById('playerTitle');
+        const playerArtist = document.getElementById('playerArtist');
+        const playerCover = document.getElementById('playerCover');
+        
+        // Track list
+        const tracks = [
+            {
+                id: 'tak-ingin-usai',
+                title: 'DJ TAK INGIN USAI BREAKBEAT',
+                artist: 'Akbar Nawasunda',
+                duration: 227, // seconds
+                cover: 'https://raw.githubusercontent.com/elnawasunda/akbar-portofolio/1144b6e6bb86e29312e0a57630a97b02566228ba/logo.png'
+            },
+            {
+                id: 'hargai-aku',
+                title: 'DJ HARGAI AKU BREAKBEAT',
+                artist: 'Akbar Nawasunda',
+                duration: 252,
+                cover: 'https://raw.githubusercontent.com/elnawasunda/akbar-portofolio/1144b6e6bb86e29312e0a57630a97b02566228ba/logo.png'
+            },
+            {
+                id: 'die-with-smile',
+                title: 'DJ DIE WITH A SMILE BREAKBEAT',
+                artist: 'Akbar Nawasunda',
+                duration: 238,
+                cover: 'https://raw.githubusercontent.com/elnawasunda/akbar-portofolio/1144b6e6bb86e29312e0a57630a97b02566228ba/logo.png'
+            },
+            {
+                id: 'apt-remix',
+                title: 'ROSE & Bruno Mars - APT 2024 [Remix]',
+                artist: 'Akbar Nawasunda',
+                duration: 270,
+                cover: 'https://raw.githubusercontent.com/elnawasunda/akbar-portofolio/1144b6e6bb86e29312e0a57630a97b02566228ba/logo.png'
+            },
+            {
+                id: 'bayang-tanpa-kata',
+                title: 'Bayang Tanpa Kata',
+                artist: 'Akbar Nawasunda',
+                duration: 245,
+                cover: 'https://raw.githubusercontent.com/elnawasunda/akbar-portofolio/1144b6e6bb86e29312e0a57630a97b02566228ba/logo.png'
+            },
+            {
+                id: 'tak-pernah-usai',
+                title: 'Yang Tak Pernah Usai',
+                artist: 'Akbar Nawasunda',
+                duration: 232,
+                cover: 'https://raw.githubusercontent.com/elnawasunda/akbar-portofolio/1144b6e6bb86e29312e0a57630a97b02566228ba/logo.png'
+            },
+            {
+                id: 'percaya',
+                title: 'DJ PERCAYA BREAKBEAT',
+                artist: 'Akbar Nawasunda',
+                duration: 255,
+                cover: 'https://raw.githubusercontent.com/elnawasunda/akbar-portofolio/1144b6e6bb86e29312e0a57630a97b02566228ba/logo.png'
+            },
+            {
+                id: 'ujung-waktu',
+                title: 'Di Ujung Waktu',
+                artist: 'Akbar Nawasunda',
+                duration: 262,
+                cover: 'https://raw.githubusercontent.com/elnawasunda/akbar-portofolio/1144b6e6bb86e29312e0a57630a97b02566228ba/logo.png'
+            }
+        ];
+        
+        let currentTrackIndex = 0;
+        let isPlaying = false;
+        let audioContext;
+        let audioBuffer;
+        let sourceNode;
+        let startTime;
+        let pausedTime = 0;
+        
+        // Format time (seconds to mm:ss)
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+        
+        // Load track
+        function loadTrack(index) {
+            currentTrackIndex = index;
+            const track = tracks[index];
+            
+            playerTitle.textContent = track.title;
+            playerArtist.textContent = track.artist;
+            playerCover.innerHTML = `<img src="${track.cover}" alt="${track.title}">`;
+            durationEl.textContent = formatTime(track.duration);
+            currentTimeEl.textContent = '0:00';
+            progress.style.width = '0%';
+            
+            // Reset audio
+            if (sourceNode) {
+                sourceNode.stop();
+                sourceNode = null;
+            }
+            
+            pausedTime = 0;
+            
+            // Simulate loading audio (in a real app, you would load actual audio files)
+            // For demo purposes, we'll just simulate
+        }
+        
+        // Play/pause track
+        function playPauseTrack() {
+            if (isPlaying) {
+                // Pause
+                if (sourceNode) {
+                    sourceNode.stop();
+                    pausedTime = audioContext.currentTime - startTime;
+                }
+                playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                isPlaying = false;
+            } else {
+                // Play
+                if (!audioContext) {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                
+                // For demo, we'll create an empty buffer
+                const buffer = audioContext.createBuffer(1, 1, 22050);
+                
+                sourceNode = audioContext.createBufferSource();
+                sourceNode.buffer = buffer;
+                sourceNode.connect(audioContext.destination);
+                
+                startTime = audioContext.currentTime - pausedTime;
+                sourceNode.start(0, pausedTime);
+                
+                // Simulate progress
+                simulateProgress();
+                
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                isPlaying = true;
+            }
+        }
+        
+        // Simulate progress bar movement
+        function simulateProgress() {
+            if (!isPlaying) return;
+            
+            const track = tracks[currentTrackIndex];
+            const elapsed = pausedTime + (audioContext.currentTime - startTime);
+            const progressPercent = (elapsed / track.duration) * 100;
+            
+            progress.style.width = `${progressPercent}%`;
+            currentTimeEl.textContent = formatTime(elapsed);
+            
+            if (elapsed < track.duration) {
+                requestAnimationFrame(simulateProgress);
+            } else {
+                // Track ended
+                playNextTrack();
+            }
+        }
+        
+        // Play next track
+        function playNextTrack() {
+            currentTrackIndex = (currentTrackIndex + 1) % tracks.length;
+            loadTrack(currentTrackIndex);
+            playPauseTrack();
+        }
+        
+        // Play previous track
+        function playPrevTrack() {
+            currentTrackIndex = (currentTrackIndex - 1 + tracks.length) % tracks.length;
+            loadTrack(currentTrackIndex);
+            playPauseTrack();
+        }
+        
+        // Set progress
+        function setProgress(e) {
+            if (!isPlaying) return;
+            
+            const width = this.clientWidth;
+            const clickX = e.offsetX;
+            const percent = clickX / width;
+            const track = tracks[currentTrackIndex];
+            const seekTime = percent * track.duration;
+            
+            pausedTime = seekTime;
+            
+            if (sourceNode) {
+                sourceNode.stop();
+            }
+            
+            playPauseTrack();
+        }
+        
+        // Initialize player
+        function initPlayer() {
+            loadTrack(0);
+            
+            // Event listeners
+            playBtn.addEventListener('click', playPauseTrack);
+            prevBtn.addEventListener('click', playPrevTrack);
+            nextBtn.addEventListener('click', playNextTrack);
+            closePlayer.addEventListener('click', () => {
+                musicPlayer.classList.remove('active');
+                if (isPlaying) {
+                    playPauseTrack();
+                }
+            });
+            progressBar.addEventListener('click', setProgress);
+            
+            // Play track from discography
+            document.querySelectorAll('.play-track').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const trackId = btn.getAttribute('data-track');
+                    const trackTitle = btn.getAttribute('data-title');
+                    
+                    // Find track index
+                    const trackIndex = tracks.findIndex(track => track.id === trackId);
+                    if (trackIndex !== -1) {
+                        currentTrackIndex = trackIndex;
+                        loadTrack(currentTrackIndex);
+                        playPauseTrack();
+                        musicPlayer.classList.add('active');
+                    }
+                });
+            });
+        }
+        
+        // Contact form
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Pesan Anda telah terkirim! Saya akan menghubungi Anda segera.');
+            contactForm.reset();
+        });
+        
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             // Start animation
@@ -1279,6 +2415,12 @@
                     alert(`Fitur bahasa ${lang} akan segera tersedia!`);
                 });
             });
+            
+            // Initialize player
+            initPlayer();
+            
+            // Initialize Swiper
+            swiper.init();
         });
     </script>
 </body>
